@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<AssemblyName>RhoMicro.Common</AssemblyName>
+		<RootNamespace>RhoMicro.Common</RootNamespace>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Title>RhoMicro.Common</Title>
+		<Authors>Paul Braetz</Authors>
+		<Description>Common types used in RhoMicro projects.</Description>
+		<Website>https.ww.github.com/PaulBraetz/RhoMicro.Common</Website>
+		<Version>1.0.0</Version>
+		<IncludeSymbols>True</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+		<EnableNETAnalyzers>True</EnableNETAnalyzers>
+		<AnalysisLevel>latest-minimum</AnalysisLevel>
+		<License>MIT</License>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<WarningsAsErrors>$(WarningsAsErrors);NU1605;1591;1573;1712</WarningsAsErrors>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<WarningsAsErrors>$(WarningsAsErrors);NU1605;1591;1573;1712</WarningsAsErrors>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Include="..\IO\Extensions.cs" Link="IO\Extensions.cs" />
+		<Compile Include="..\IO\TemporaryDirectory.cs" Link="IO\TemporaryDirectory.cs" />
+		<Compile Include="..\System\Abstractions\IObservableDisposableBase.cs" Link="System\Abstractions\IObservableDisposableBase.cs" />
+		<Compile Include="..\System\DisposableBase.cs" Link="System\DisposableBase.cs" />
+		<Compile Include="..\System\ObservableDisposableBase.cs" Link="System\ObservableDisposableBase.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="RhoMicro.Fort" Version="1.1.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="System\Abstractions\" />
+	</ItemGroup>
+	
+</Project>
