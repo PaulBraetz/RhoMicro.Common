@@ -2,6 +2,7 @@
 using RhoMicro.Common.IO;
 using RhoMicro.Common.System;
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace RhoMicro.Common.IO
@@ -9,7 +10,7 @@ namespace RhoMicro.Common.IO
 	/// <summary>
 	/// Represents a temporary, disposable directory that will delete itself upon disposal.
 	/// </summary>
-	public sealed class TemporaryDirectory : DisposableBase
+	public sealed class TemporaryDirectory : DisposableBase, IEquatable<TemporaryDirectory>
 	{
 		/// <summary>
 		/// Initializes a new temporary directory.
@@ -20,18 +21,13 @@ namespace RhoMicro.Common.IO
 			directory.ThrowIfDefault(nameof(directory));
 
 			directory.Create();
-			_directoryPath = directory.FullName;
-			_directory = directory;
+			Directory = directory;
 		}
-
-		private readonly String _directoryPath;
-
-		private DirectoryInfo _directory;
 
 		/// <summary>
 		/// The temporary directory, to be deleted upon instance disposal.
 		/// </summary>
-		public DirectoryInfo Directory => _directory;
+		public DirectoryInfo Directory { get; private set; }
 
 		/// <summary>
 		/// Invoked after <see cref="Directory"/> is deleted as a result of this instance's disposal.
@@ -68,8 +64,30 @@ namespace RhoMicro.Common.IO
 		/// <inheritdoc/>
 		protected override void OnDiposed()
 		{
-			_directory = new DirectoryInfo(_directoryPath);
+			Directory = new DirectoryInfo(Directory.FullName);
 			DirectoryDeleted?.Invoke(this, EventArgs.Empty);
+		}
+
+		/// <inheritdoc/>
+		public override String ToString()
+		{
+			return Directory?.ToString();
+		}
+		/// <inheritdoc/>
+		public override Boolean Equals(Object obj)
+		{
+			return Equals(obj as TemporaryDirectory);
+		}
+		/// <inheritdoc/>
+		public Boolean Equals(TemporaryDirectory other)
+		{
+			return !(other is null) &&
+				   EqualityComparer<DirectoryInfo>.Default.Equals(Directory, other.Directory);
+		}
+		/// <inheritdoc/>
+		public override Int32 GetHashCode()
+		{
+			return 772425832 + EqualityComparer<DirectoryInfo>.Default.GetHashCode(Directory);
 		}
 	}
 }

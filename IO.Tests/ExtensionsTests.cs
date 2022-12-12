@@ -36,11 +36,24 @@ namespace RhoMicro.Common.IO.Tests
 						};
 			}
 		}
-		public static Object[][] DeleteRecursivelyValidData
+		private static Object[][] TestCopyDirectories
 		{
 			get
 			{
-				return new Object[][]
+				return CreateAndGetTestDirectories("Copy");
+			}
+		}
+		private static Object[][] TestDeleteDirectories
+		{
+			get
+			{
+				return CreateAndGetTestDirectories("Delete");
+			}
+		}
+
+		public static Object[][] CreateAndGetTestDirectories(String discriminator)
+		{
+			var data = new Object[][]
 				{
 					new Object[]
 					{
@@ -97,150 +110,118 @@ namespace RhoMicro.Common.IO.Tests
 						SubDirectories
 					}
 				};
+
+			foreach (var datum in data)
+			{
+				var fullDir = Path.Combine(Path.GetTempPath(), (String)datum[0] + discriminator);
+				datum[0] = fullDir;
+
+				Directory.CreateDirectory(fullDir);
+
+				foreach (var file in (Object[])datum[1])
+				{
+					var filePath = Path.Combine(fullDir, (String)file);
+					File.Create(filePath).Close();
+				}
+
+				foreach (var subDirectory in (Object[])datum[2])
+				{
+					var directoryPath = Path.Combine(fullDir, (String)subDirectory);
+					Directory.CreateDirectory(directoryPath);
+				}
+
+				try
+				{
+					Directory.Delete(fullDir);
+					Assert.Fail($"Expected: <<System.IO.IOException: The directory is not empty. : '{fullDir}'>>");
+				}
+				catch (IOException ex)
+				when (ex.Message == $"The directory is not empty. : '{fullDir}'")
+				{
+
+				}
 			}
+
+
+			return data;
 		}
 
 		[TestMethod]
-		[DynamicData(nameof(DeleteRecursivelyValidData))]
-		public void DeleteRecursively(String subDirectoryName, Object[] files, Object[] subDirectories)
+		[DynamicData(nameof(TestDeleteDirectories))]
+		public void DeleteRecursively(String dir, Object[] files, Object[] subDirectories)
 		{
-			var tempDir = Path.GetTempPath();
-			var dir = Path.Combine(tempDir, subDirectoryName);
-			Directory.CreateDirectory(dir);
-
-			foreach (var file in files)
-			{
-				var filePath = Path.Combine(dir, file.ToString()!);
-				File.Create(filePath).Close();
-			}
-
-			foreach (var subDirectory in subDirectories)
-			{
-				var directoryPath = Path.Combine(dir, subDirectory.ToString()!);
-				Directory.CreateDirectory(directoryPath);
-			}
-
-			assert(exists: true);
-
-			try
-			{
-				Directory.Delete(dir);
-			}
-			catch (IOException ex)
-			when (ex.Message == $"The directory is not empty. : '{dir}'")
-			{
-
-			}
-			catch
-			{
-				Assert.Fail($"Expected: <<System.IO.IOException: The directory is not empty. : '{dir}'>>");
-			}
+			assert(exists: true, dir, files, subDirectories);
 
 			new DirectoryInfo(dir).DeleteRecursively();
-			assert(exists: false);
 
-			void assert(Boolean exists)
-			{
-				Assert.AreEqual(exists, Directory.Exists(dir));
-
-				foreach (var file in files)
-				{
-					var filePath = Path.Combine(dir, file.ToString()!);
-					Assert.AreEqual(exists, File.Exists(filePath));
-				}
-
-				foreach (var subDirectory in subDirectories)
-				{
-					var directoryPath = Path.Combine(dir, subDirectory.ToString()!);
-					Assert.AreEqual(exists, Directory.Exists(directoryPath));
-				}
-			}
-		}
-	}
-	[TestClass]
-	public class TemporaryDirectoryTests
-	{
-		private static Object[][] DeleteRecursivelyValidData
-		{
-			get
-			{
-				return ExtensionsTests.DeleteRecursivelyValidData;
-			}
+			assert(exists: false, dir, files, subDirectories);
 		}
 
 		[TestMethod]
-		[DynamicData(nameof(DeleteRecursivelyValidData))]
-		public void Dispose(String subDirectoryName, Object[] files, Object[] subDirectories)
+		[DynamicData(nameof(TestCopyDirectories))]
+		public void TestCopyRecursively(String dir, Object[] files, Object[] subDirectories)
 		{
-			var tempDir = Path.GetTempPath();
-			var dir = Path.Combine(tempDir, subDirectoryName);
-			Directory.CreateDirectory(dir);
+			assert(exists: true, dir, files, subDirectories);
+
+			var target = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+			new DirectoryInfo(dir).CopyRecursively(target);
+
+			assert(exists: true, dir, files, subDirectories);
+			assert(exists: true, target, files, subDirectories);
+		}
+
+		[TestMethod]
+		public void TestIsDescendantOf()
+		{
+			for (var i = 0; i < 25; i++)
+			{
+				var parent = Path.GetTempPath();
+				var child = parent;
+
+				for (var j = 0; j < i / 5; j++)
+				{
+					child = Path.Combine(child, Guid.NewGuid().ToString());
+				}
+
+				var expected = true;
+				var actual = new DirectoryInfo(child).IsDescendantOf(new DirectoryInfo(parent));
+				Assert.AreEqual(expected, actual);
+			}
+		}
+		[TestMethod]
+		public void TestIsNotDescendantOf()
+		{
+			for (var i = 0; i < 25; i++)
+			{
+				var child = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+				var parent = Path.Combine(child, Guid.NewGuid().ToString());
+
+				for (var j = 0; j < i / 5; j++)
+				{
+					child = Path.Combine(child, Guid.NewGuid().ToString());
+				}
+
+				var expected = false;
+				var actual = new DirectoryInfo(child).IsDescendantOf(new DirectoryInfo(parent));
+				Assert.AreEqual(expected, actual);
+			}
+		}
+
+		private static void assert(Boolean exists, String dir, Object[] files, Object[] subDirectories)
+		{
+			Assert.AreEqual(exists, Directory.Exists(dir));
 
 			foreach (var file in files)
 			{
 				var filePath = Path.Combine(dir, file.ToString()!);
-				File.Create(filePath).Close();
+				Assert.AreEqual(exists, File.Exists(filePath));
 			}
 
 			foreach (var subDirectory in subDirectories)
 			{
 				var directoryPath = Path.Combine(dir, subDirectory.ToString()!);
-				Directory.CreateDirectory(directoryPath);
+				Assert.AreEqual(exists, Directory.Exists(directoryPath));
 			}
-
-			try
-			{
-				Directory.Delete(dir);
-			}
-			catch (IOException ex)
-			when (ex.Message == $"The directory is not empty. : '{dir}'")
-			{
-
-			}
-			catch
-			{
-				Assert.Fail($"Expected: <<System.IO.IOException: The directory is not empty. : '{dir}'>>");
-			}
-
-			var dirInfo = new DirectoryInfo(dir);
-			using (var tmpDir = new TemporaryDirectory(dirInfo))
-			{
-				Assert.AreEqual(dirInfo.FullName, tmpDir.Directory.FullName);
-
-				assert(exists: true);
-			}
-
-			assert(exists: false);
-
-			void assert(Boolean exists)
-			{
-				Assert.AreEqual(exists, Directory.Exists(dir));
-
-				foreach (var file in files)
-				{
-					var filePath = Path.Combine(dir, file.ToString()!);
-					Assert.AreEqual(exists, File.Exists(filePath));
-				}
-
-				foreach (var subDirectory in subDirectories)
-				{
-					var directoryPath = Path.Combine(dir, subDirectory.ToString()!);
-					Assert.AreEqual(exists, Directory.Exists(directoryPath));
-				}
-			}
-		}
-		[TestMethod]
-		[DynamicData(nameof(DeleteRecursivelyValidData))]
-#pragma warning disable IDE0060 // Remove unused parameter
-		public void CreateInTempPath(String subDirectoryName, Object[] files, Object[] subDirectories)
-#pragma warning restore IDE0060 // Remove unused parameter
-		{
-			var tempDir = Path.GetTempPath();
-			var dir = Path.Combine(tempDir, subDirectoryName);
-			var expected = new DirectoryInfo(dir);
-
-			var actual = TemporaryDirectory.CreateInTempPath(subDirectoryName).Directory;
-			Assert.AreEqual(expected.FullName, actual.FullName);
 		}
 	}
 }

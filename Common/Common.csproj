@@ -10,13 +10,15 @@
 		<Authors>Paul Braetz</Authors>
 		<Description>Common types used in RhoMicro projects.</Description>
 		<Website>https.ww.github.com/PaulBraetz/RhoMicro.Common</Website>
-		<Version>1.0.0</Version>
+		<Version>1.3.0</Version>
 		<IncludeSymbols>True</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
 		<EnableNETAnalyzers>True</EnableNETAnalyzers>
 		<AnalysisLevel>latest-minimum</AnalysisLevel>
 		<License>MIT</License>
+		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -31,8 +33,11 @@
 		<Compile Include="..\IO\Extensions.cs" Link="IO\Extensions.cs" />
 		<Compile Include="..\IO\TemporaryDirectory.cs" Link="IO\TemporaryDirectory.cs" />
 		<Compile Include="..\System\Abstractions\IObservableDisposableBase.cs" Link="System\Abstractions\IObservableDisposableBase.cs" />
+		<Compile Include="..\System\Abstractions\IVisitor.cs" Link="System\Abstractions\IVisitor.cs" />
+		<Compile Include="..\System\Abstractions\VisitorBase.cs" Link="System\Abstractions\VisitorBase.cs" />
 		<Compile Include="..\System\DisposableBase.cs" Link="System\DisposableBase.cs" />
 		<Compile Include="..\System\ObservableDisposableBase.cs" Link="System\ObservableDisposableBase.cs" />
+		<Compile Include="..\System\VisitorStrategy.cs" Link="System\VisitorStrategy.cs" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -41,6 +46,13 @@
 
 	<ItemGroup>
 		<Folder Include="System\Abstractions\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="..\LICENSE.txt">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
 	</ItemGroup>
 	
 </Project>
