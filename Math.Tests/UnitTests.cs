@@ -8,22 +8,16 @@ namespace RhoMicro.Common.Math.Tests
 		[TestMethod]
 		public void NullNameConstructor()
 		{
-			Assert.ThrowsException<ArgumentNullException>(() => new Unit(null));
+			_ = Assert.ThrowsException<ArgumentNullException>(() => new Unit(null));
 		}
 
 		[TestMethod]
 		public void EmptyNameConstructor()
 		{
-			Assert.ThrowsException<ArgumentException>(() => new Unit(String.Empty));
+			_ = Assert.ThrowsException<ArgumentException>(() => new Unit(String.Empty));
 		}
 
-		private static Object[][] Names
-		{
-			get
-			{
-				return TestData.Names;
-			}
-		}
+		private static Object[][] Names => TestData.Names;
 		[TestMethod]
 		[DynamicData(nameof(Names))]
 		public void NameConstructor(String name)
@@ -33,13 +27,7 @@ namespace RhoMicro.Common.Math.Tests
 			Assert.AreEqual(name, unit.Name);
 		}
 
-		private static Object[][] EqualNames
-		{
-			get
-			{
-				return TestData.EqualNames;
-			}
-		}
+		private static Object[][] EqualNames => TestData.EqualNames;
 		[TestMethod]
 		[DynamicData(nameof(EqualNames))]
 		public void ObjectEquals(String nameA, String nameB)
@@ -49,7 +37,7 @@ namespace RhoMicro.Common.Math.Tests
 			var unitA = new Unit(nameA);
 			Object unitB = new Unit(nameB);
 
-			var actual = unitA.Equals(unitB);
+			Boolean actual = unitA.Equals(unitB);
 
 			Assert.IsTrue(actual);
 		}
@@ -62,7 +50,7 @@ namespace RhoMicro.Common.Math.Tests
 			var unitA = new Unit(nameA);
 			var unitB = new Unit(nameB);
 
-			var actual = unitA.Equals(unitB);
+			Boolean actual = unitA.Equals(unitB);
 
 			Assert.IsTrue(actual);
 		}
@@ -75,7 +63,7 @@ namespace RhoMicro.Common.Math.Tests
 			var unitA = new Unit(nameA);
 			var unitB = new Unit(nameB);
 
-			var actual = unitA == unitB;
+			Boolean actual = unitA == unitB;
 
 			Assert.IsTrue(actual);
 		}
@@ -88,18 +76,12 @@ namespace RhoMicro.Common.Math.Tests
 			var unitA = new Unit(nameA);
 			var unitB = new Unit(nameB);
 
-			var actual = unitA != unitB;
+			Boolean actual = unitA != unitB;
 
 			Assert.IsFalse(actual);
 		}
 
-		private static Object[][] NotEqualNames
-		{
-			get
-			{
-				return TestData.NotEqualNames;
-			}
-		}
+		private static Object[][] NotEqualNames => TestData.NotEqualNames;
 		[TestMethod]
 		[DynamicData(nameof(NotEqualNames))]
 		public void ObjectNotEquals(String nameA, String nameB)
@@ -109,7 +91,7 @@ namespace RhoMicro.Common.Math.Tests
 			var unitA = new Unit(nameA);
 			Object unitB = new Unit(nameB);
 
-			var actual = unitA.Equals(unitB);
+			Boolean actual = unitA.Equals(unitB);
 
 			Assert.IsFalse(actual);
 		}
@@ -122,7 +104,7 @@ namespace RhoMicro.Common.Math.Tests
 			var unitA = new Unit(nameA);
 			var unitB = new Unit(nameB);
 
-			var actual = unitA.Equals(unitB);
+			Boolean actual = unitA.Equals(unitB);
 
 			Assert.IsFalse(actual);
 		}
@@ -135,7 +117,7 @@ namespace RhoMicro.Common.Math.Tests
 			var unitA = new Unit(nameA);
 			var unitB = new Unit(nameB);
 
-			var actual = unitA == unitB;
+			Boolean actual = unitA == unitB;
 
 			Assert.IsFalse(actual);
 		}
@@ -148,7 +130,7 @@ namespace RhoMicro.Common.Math.Tests
 			var unitA = new Unit(nameA);
 			var unitB = new Unit(nameB);
 
-			var actual = unitA != unitB;
+			Boolean actual = unitA != unitB;
 
 			Assert.IsTrue(actual);
 		}
@@ -159,10 +141,10 @@ namespace RhoMicro.Common.Math.Tests
 		{
 			nameA.ThrowIfNot(s => s == nameB);
 
-			var newNameA = String.Concat(nameA.ToCharArray());
-			var newNameB = String.Concat(nameA.ToCharArray());
+			String newNameA = String.Concat(nameA.ToCharArray());
+			String newNameB = String.Concat(nameA.ToCharArray());
 
-			var actualEquality = Object.ReferenceEquals(nameA, nameB);
+			Boolean actualEquality = Object.ReferenceEquals(nameA, nameB);
 			Assert.IsFalse(actualEquality);
 
 			var unitA = new Unit(newNameA);

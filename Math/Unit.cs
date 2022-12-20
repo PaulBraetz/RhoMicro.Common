@@ -2,7 +2,6 @@
 using RhoMicro.Common.Math.Abstractions;
 using RhoMicro.Common.Math.Comparers;
 using System;
-using System.Collections.Generic;
 
 namespace RhoMicro.Common.Math
 {

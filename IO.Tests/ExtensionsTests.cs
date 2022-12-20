@@ -1,16 +1,9 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RhoMicro.Common.IO;
-
 namespace RhoMicro.Common.IO.Tests
 {
 	[TestClass]
 	public class ExtensionsTests
 	{
-		private static Object[] Files
-		{
-			get
-			{
-				return new Object[]
+		private static Object[] Files => new Object[]
 						{
 							"File 1.xyz",
 							"File 2.xyz",
@@ -19,13 +12,7 @@ namespace RhoMicro.Common.IO.Tests
 							"09v48732mc93287n4c8.xyz",
 							"file.xyz"
 						};
-			}
-		}
-		private static Object[] SubDirectories
-		{
-			get
-			{
-				return new Object[]
+		private static Object[] SubDirectories => new Object[]
 						{
 							"SubDirectory1",
 							"SubDirectory2",
@@ -34,26 +21,12 @@ namespace RhoMicro.Common.IO.Tests
 							"4v238vn7234nc",
 							"subDir"
 						};
-			}
-		}
-		private static Object[][] TestCopyDirectories
-		{
-			get
-			{
-				return CreateAndGetTestDirectories("Copy");
-			}
-		}
-		private static Object[][] TestDeleteDirectories
-		{
-			get
-			{
-				return CreateAndGetTestDirectories("Delete");
-			}
-		}
+		private static Object[][] TestCopyDirectories => CreateAndGetTestDirectories("Copy");
+		private static Object[][] TestDeleteDirectories => CreateAndGetTestDirectories("Delete");
 
 		public static Object[][] CreateAndGetTestDirectories(String discriminator)
 		{
-			var data = new Object[][]
+			Object[][] data = new Object[][]
 				{
 					new Object[]
 					{
@@ -111,23 +84,23 @@ namespace RhoMicro.Common.IO.Tests
 					}
 				};
 
-			foreach (var datum in data)
+			foreach (Object[] datum in data)
 			{
-				var fullDir = Path.Combine(Path.GetTempPath(), (String)datum[0] + discriminator);
+				String fullDir = Path.Combine(Path.GetTempPath(), (String)datum[0] + discriminator);
 				datum[0] = fullDir;
 
-				Directory.CreateDirectory(fullDir);
+				_ = Directory.CreateDirectory(fullDir);
 
-				foreach (var file in (Object[])datum[1])
+				foreach (Object file in (Object[])datum[1])
 				{
-					var filePath = Path.Combine(fullDir, (String)file);
+					String filePath = Path.Combine(fullDir, (String)file);
 					File.Create(filePath).Close();
 				}
 
-				foreach (var subDirectory in (Object[])datum[2])
+				foreach (Object subDirectory in (Object[])datum[2])
 				{
-					var directoryPath = Path.Combine(fullDir, (String)subDirectory);
-					Directory.CreateDirectory(directoryPath);
+					String directoryPath = Path.Combine(fullDir, (String)subDirectory);
+					_ = Directory.CreateDirectory(directoryPath);
 				}
 
 				try
@@ -141,7 +114,6 @@ namespace RhoMicro.Common.IO.Tests
 
 				}
 			}
-
 
 			return data;
 		}
@@ -163,7 +135,7 @@ namespace RhoMicro.Common.IO.Tests
 		{
 			assert(exists: true, dir, files, subDirectories);
 
-			var target = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+			String target = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
 			new DirectoryInfo(dir).CopyRecursively(target);
 
 			assert(exists: true, dir, files, subDirectories);
@@ -173,36 +145,36 @@ namespace RhoMicro.Common.IO.Tests
 		[TestMethod]
 		public void TestIsDescendantOf()
 		{
-			for (var i = 0; i < 25; i++)
+			for (Int32 i = 0; i < 25; i++)
 			{
-				var parent = Path.GetTempPath();
-				var child = parent;
+				String parent = Path.GetTempPath();
+				String child = parent;
 
-				for (var j = 0; j < i / 5; j++)
+				for (Int32 j = 0; j < i / 5; j++)
 				{
 					child = Path.Combine(child, Guid.NewGuid().ToString());
 				}
 
-				var expected = true;
-				var actual = new DirectoryInfo(child).IsDescendantOf(new DirectoryInfo(parent));
+				Boolean expected = true;
+				Boolean actual = new DirectoryInfo(child).IsDescendantOf(new DirectoryInfo(parent));
 				Assert.AreEqual(expected, actual);
 			}
 		}
 		[TestMethod]
 		public void TestIsNotDescendantOf()
 		{
-			for (var i = 0; i < 25; i++)
+			for (Int32 i = 0; i < 25; i++)
 			{
-				var child = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
-				var parent = Path.Combine(child, Guid.NewGuid().ToString());
+				String child = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+				String parent = Path.Combine(child, Guid.NewGuid().ToString());
 
-				for (var j = 0; j < i / 5; j++)
+				for (Int32 j = 0; j < i / 5; j++)
 				{
 					child = Path.Combine(child, Guid.NewGuid().ToString());
 				}
 
-				var expected = false;
-				var actual = new DirectoryInfo(child).IsDescendantOf(new DirectoryInfo(parent));
+				Boolean expected = false;
+				Boolean actual = new DirectoryInfo(child).IsDescendantOf(new DirectoryInfo(parent));
 				Assert.AreEqual(expected, actual);
 			}
 		}
@@ -211,15 +183,15 @@ namespace RhoMicro.Common.IO.Tests
 		{
 			Assert.AreEqual(exists, Directory.Exists(dir));
 
-			foreach (var file in files)
+			foreach (Object file in files)
 			{
-				var filePath = Path.Combine(dir, file.ToString()!);
+				String filePath = Path.Combine(dir, file.ToString()!);
 				Assert.AreEqual(exists, File.Exists(filePath));
 			}
 
-			foreach (var subDirectory in subDirectories)
+			foreach (Object subDirectory in subDirectories)
 			{
-				var directoryPath = Path.Combine(dir, subDirectory.ToString()!);
+				String directoryPath = Path.Combine(dir, subDirectory.ToString()!);
 				Assert.AreEqual(exists, Directory.Exists(directoryPath));
 			}
 		}

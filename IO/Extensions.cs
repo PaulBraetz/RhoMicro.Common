@@ -25,19 +25,20 @@ namespace RhoMicro.Common.IO
 		{
 			directory.ThrowIfDefaultOrNot(d => d.Exists, $"{nameof(directory)} does not exist.", nameof(directory));
 
-			foreach (var file in directory.GetFiles())
+			foreach (FileInfo file in directory.GetFiles())
 			{
 				cancellationToken.ThrowIfCancellationRequested();
 				file.Delete();
 				fileDeletedProgress?.Report(file);
 			}
 
-			foreach (var nestedDirectory in directory.GetDirectories())
+			foreach (DirectoryInfo nestedDirectory in directory.GetDirectories())
 			{
 				cancellationToken.ThrowIfCancellationRequested();
 				nestedDirectory.DeleteRecursively();
 				directoryDeletedProgress?.Report(nestedDirectory);
 			}
+
 			directory.Delete();
 		}
 		/// <summary>
@@ -59,29 +60,29 @@ namespace RhoMicro.Common.IO
 			directory.ThrowIfDefaultOrNot(d => d.Exists, $"{nameof(directory)} does not exist.", nameof(directory));
 			targetDirectory.ThrowIfDefault(nameof(targetDirectory));
 
-			var fullTargetPath = Path.GetFullPath(targetDirectory);
-			var rootPattern = $"^{Regex.Escape(directory.FullName)}";
+			String fullTargetPath = Path.GetFullPath(targetDirectory);
+			String rootPattern = $"^{Regex.Escape(directory.FullName)}";
 			if (Regex.IsMatch(fullTargetPath, rootPattern))
 			{
 				throw new ArgumentException($"{nameof(targetDirectory)} {fullTargetPath} is equal to or a subdirectory of {nameof(directory)} {directory}.", nameof(targetDirectory));
 			}
 
-			Directory.CreateDirectory(fullTargetPath);
+			_ = Directory.CreateDirectory(fullTargetPath);
 
-			var files = directory.GetFiles();
-			foreach (var file in files)
+			FileInfo[] files = directory.GetFiles();
+			foreach (FileInfo file in files)
 			{
 				cancellationToken.ThrowIfCancellationRequested();
-				var newFilePath = Regex.Replace(file.FullName, rootPattern, targetDirectory, RegexOptions.None);
+				String newFilePath = Regex.Replace(file.FullName, rootPattern, targetDirectory, RegexOptions.None);
 				File.Copy(file.FullName, newFilePath, overwrite);
 				fileCopiedProgress?.Report(file);
 			}
 
-			var subDirectories = directory.GetDirectories();
-			foreach (var subDirectory in subDirectories)
+			DirectoryInfo[] subDirectories = directory.GetDirectories();
+			foreach (DirectoryInfo subDirectory in subDirectories)
 			{
 				cancellationToken.ThrowIfCancellationRequested();
-				var newSubDirectory = Path.Combine(targetDirectory, subDirectory.Name);
+				String newSubDirectory = Path.Combine(targetDirectory, subDirectory.Name);
 				subDirectory.CopyRecursively(newSubDirectory, overwrite);
 				directoryCopiedProgress?.Report(subDirectory);
 			}
@@ -98,18 +99,18 @@ namespace RhoMicro.Common.IO
 			directory.ThrowIfDefault(nameof(directory));
 			parent.ThrowIfDefault(nameof(parent));
 
-			var directorySeparators = new[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar };
+			Char[] directorySeparators = new[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar };
 
-			var directoryPath = directory.FullName.TrimEnd(directorySeparators);
-			var parentPath = parent.FullName.TrimEnd(directorySeparators);
+			String directoryPath = directory.FullName.TrimEnd(directorySeparators);
+			String parentPath = parent.FullName.TrimEnd(directorySeparators);
 
 			Boolean result;
 			if (directoryPath != parentPath)
 			{
-				var directoryParts = directoryPath.Split(directorySeparators);
-				var parentParts = parentPath.Split(directorySeparators);
+				String[] directoryParts = directoryPath.Split(directorySeparators);
+				String[] parentParts = parentPath.Split(directorySeparators);
 
-				if(directoryParts.Length < parentParts.Length)
+				if (directoryParts.Length < parentParts.Length)
 				{
 					result = false;
 				}
@@ -117,7 +118,7 @@ namespace RhoMicro.Common.IO
 				{
 					result = true;
 
-					for (var i = parentParts.Length - 1; i >= 0; i--)
+					for (Int32 i = parentParts.Length - 1; i >= 0; i--)
 					{
 						if (directoryParts[i] != parentParts[i])
 						{

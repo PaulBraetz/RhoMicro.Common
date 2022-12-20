@@ -3,32 +3,26 @@
 	[TestClass]
 	public class TemporaryDirectoryTests
 	{
-		private static Object[][] DisposeData
-		{
-			get
-			{
-				return ExtensionsTests.CreateAndGetTestDirectories("Dispose");
-			}
-		}
+		private static Object[][] DisposeData => ExtensionsTests.CreateAndGetTestDirectories("Dispose");
 
 		[TestMethod]
 		[DynamicData(nameof(DisposeData))]
 		public void Dispose(String subDirectoryName, Object[] files, Object[] subDirectories)
 		{
-			var tempDir = Path.GetTempPath();
-			var dir = Path.Combine(tempDir, subDirectoryName);
-			Directory.CreateDirectory(dir);
+			String tempDir = Path.GetTempPath();
+			String dir = Path.Combine(tempDir, subDirectoryName);
+			_ = Directory.CreateDirectory(dir);
 
-			foreach (var file in files)
+			foreach (Object file in files)
 			{
-				var filePath = Path.Combine(dir, file.ToString()!);
+				String filePath = Path.Combine(dir, file.ToString()!);
 				File.Create(filePath).Close();
 			}
 
-			foreach (var subDirectory in subDirectories)
+			foreach (Object subDirectory in subDirectories)
 			{
-				var directoryPath = Path.Combine(dir, subDirectory.ToString()!);
-				Directory.CreateDirectory(directoryPath);
+				String directoryPath = Path.Combine(dir, subDirectory.ToString()!);
+				_ = Directory.CreateDirectory(directoryPath);
 			}
 
 			try
@@ -59,15 +53,15 @@
 			{
 				Assert.AreEqual(exists, Directory.Exists(dir));
 
-				foreach (var file in files)
+				foreach (Object file in files)
 				{
-					var filePath = Path.Combine(dir, file.ToString()!);
+					String filePath = Path.Combine(dir, file.ToString()!);
 					Assert.AreEqual(exists, File.Exists(filePath));
 				}
 
-				foreach (var subDirectory in subDirectories)
+				foreach (Object subDirectory in subDirectories)
 				{
-					var directoryPath = Path.Combine(dir, subDirectory.ToString()!);
+					String directoryPath = Path.Combine(dir, subDirectory.ToString()!);
 					Assert.AreEqual(exists, Directory.Exists(directoryPath));
 				}
 			}
@@ -78,11 +72,11 @@
 		public void CreateInTempPath(String subDirectoryName, Object[] files, Object[] subDirectories)
 #pragma warning restore IDE0060 // Remove unused parameter
 		{
-			var tempDir = Path.GetTempPath();
-			var dir = Path.Combine(tempDir, subDirectoryName);
+			String tempDir = Path.GetTempPath();
+			String dir = Path.Combine(tempDir, subDirectoryName);
 			var expected = new DirectoryInfo(dir);
 
-			var actual = TemporaryDirectory.CreateInTempPath(subDirectoryName).Directory;
+			DirectoryInfo actual = TemporaryDirectory.CreateInTempPath(subDirectoryName).Directory;
 			Assert.AreEqual(expected.FullName, actual.FullName);
 		}
 	}

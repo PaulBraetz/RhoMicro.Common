@@ -1,11 +1,10 @@
 ﻿using Fort;
+using RhoMicro.Common.System.Abstractions;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace RhoMicro.Common.System
 {
-	internal sealed class VisitorStrategy<T> : Abstractions.VisitorBase<T>
+	internal sealed class VisitorStrategy<T> : VisitorBase<T>
 	{
 		public VisitorStrategy(Action<T> receiveStrategy, Func<T, Boolean> canReceiveStrategy = null)
 		{

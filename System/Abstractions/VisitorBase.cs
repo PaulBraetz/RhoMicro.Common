@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Fort;
+using System;
 
 namespace RhoMicro.Common.System.Abstractions
 {
@@ -40,6 +41,7 @@ namespace RhoMicro.Common.System.Abstractions
 		/// <returns>A new instance of <see cref="IVisitor{T}"/>, based on the strategies provided.</returns>
 		public static IVisitor<T> Create(Action<T> receiveStrategy, Func<T, Boolean> canReceiveStrategy = null)
 		{
+			receiveStrategy.ThrowIfDefault(nameof(receiveStrategy));
 			var result = new VisitorStrategy<T>(receiveStrategy, canReceiveStrategy);
 
 			return result;

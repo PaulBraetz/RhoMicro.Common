@@ -13,9 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IO.Tests", "IO.Tests\IO.Tes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.Tests", "System.Tests\System.Tests.csproj", "{654E634B-8267-477A-9CC3-7FC87EBF09A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Math", "Math\Math.csproj", "{DA332066-839A-43C4-B273-B32D22571BFE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Math", "Math\Math.csproj", "{DA332066-839A-43C4-B273-B32D22571BFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Math.Tests", "Math.Tests\Math.Tests.csproj", "{D51A4A63-518A-4827-A1E5-36BD737FBD76}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Math.Tests", "Math.Tests\Math.Tests.csproj", "{D51A4A63-518A-4827-A1E5-36BD737FBD76}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

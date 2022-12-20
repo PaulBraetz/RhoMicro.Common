@@ -1,8 +1,6 @@
 ﻿using RhoMicro.Common.Math.Abstractions;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Xml.Linq;
 
 namespace RhoMicro.Common.Math.Comparers
 {
@@ -25,12 +23,13 @@ namespace RhoMicro.Common.Math.Comparers
 			{
 				return y == null;
 			}
+
 			if (y == null)
 			{
 				return x == null;
 			}
 
-			var result = x.Name == y.Name;
+			Boolean result = x.Name == y.Name;
 
 			return result;
 		}
@@ -43,7 +42,7 @@ namespace RhoMicro.Common.Math.Comparers
 				throw new ArgumentNullException(nameof(obj));
 			}
 
-			var result = 539060726 + EqualityComparer<String>.Default.GetHashCode(obj.Name);
+			Int32 result = 539060726 + EqualityComparer<String>.Default.GetHashCode(obj.Name);
 
 			return result;
 		}

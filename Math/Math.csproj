@@ -8,7 +8,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="RhoMicro.Fort" Version="1.1.1" />
+		<PackageReference Include="Microsoft.Bcl.HashCode" Version="1.1.1" />
+		<PackageReference Include="RhoMicro.Fort" Version="1.2.0" />
 	</ItemGroup>
 
 </Project>

@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Text;
-
-namespace RhoMicro.Common.System.Abstractions
+﻿namespace RhoMicro.Common.System.Abstractions
 {
 	/// <summary>
 	/// Represents an implementation of the visitor pattern.

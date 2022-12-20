@@ -1,18 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RhoMicro.Common.Math.Tests
+﻿namespace RhoMicro.Common.Math.Tests
 {
 	internal static class TestData
 	{
-		public static Object[][] EqualNames
-		{
-			get
-			{
-				return new Object[][]
+		public static Object[][] EqualNames => new Object[][]
 				{
 					new Object[]{"m", "m"},
 					new Object[]{"MyUnit", "MyUnit"},
@@ -20,21 +10,9 @@ namespace RhoMicro.Common.Math.Tests
 					new Object[]{"°", "°"},
 					new Object[]{"m/s^2", "m/s^2"}
 				};
-			}
-		}
-		public static Object[][] EqualUnits
-		{
-			get
-			{
-				return EqualNames.Select(args => args.Select(arg => (Object)new Unit((String)arg)).ToArray()).ToArray();
-			}
-		}
+		public static Object[][] EqualUnits => EqualNames.Select(args => args.Select(arg => (Object)new Unit((String)arg)).ToArray()).ToArray();
 
-		public static Object[][] NotEqualNames
-		{
-			get
-			{
-				return new Object[][]
+		public static Object[][] NotEqualNames => new Object[][]
 				{
 					new Object[]{"m", "s"},
 					new Object[]{"MyUnit", "MyUnit1"},
@@ -42,13 +20,7 @@ namespace RhoMicro.Common.Math.Tests
 					new Object[]{"°", "rad"},
 					new Object[]{"m/s^2", "km/s^2"}
 				};
-			}
-		}
-		public static Object[][] NotEqualUnits
-		{
-			get
-			{
-				return NotEqualNames.Select(args => args.Select(arg => (Object)new Unit((String)arg)).ToArray())
+		public static Object[][] NotEqualUnits => NotEqualNames.Select(args => args.Select(arg => (Object)new Unit((String)arg)).ToArray())
 					.Concat(new Object[][]
 					{
 						new Object[]{null, new Unit()},
@@ -56,14 +28,8 @@ namespace RhoMicro.Common.Math.Tests
 						new Object[]{default(Unit), new Unit("m")}
 					})
 					.ToArray();
-			}
-		}
 
-		public static Object[][] Names
-		{
-			get
-			{
-				return new Object[][]
+		public static Object[][] Names => new Object[][]
 				{
 					new Object[]{"m"},
 					new Object[]{"MyUnit"},
@@ -71,14 +37,6 @@ namespace RhoMicro.Common.Math.Tests
 					new Object[]{"°"},
 					new Object[]{"m/s^2"}
 				};
-			}
-		}
-		public static Object[][] Units
-		{
-			get
-			{
-				return Names.Select(args => args.Select(arg => (Object)new Unit((String)arg)).ToArray()).ToArray();
-			}
-		}
+		public static Object[][] Units => Names.Select(args => args.Select(arg => (Object)new Unit((String)arg)).ToArray()).ToArray();
 	}
 }

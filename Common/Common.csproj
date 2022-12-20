@@ -10,7 +10,7 @@
 		<Authors>Paul Braetz</Authors>
 		<Description>Common types used in RhoMicro projects.</Description>
 		<Website>https.ww.github.com/PaulBraetz/RhoMicro.Common</Website>
-		<Version>1.3.0</Version>
+		<Version>1.4.0</Version>
 		<IncludeSymbols>True</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
@@ -38,14 +38,31 @@
 		<Compile Include="..\System\DisposableBase.cs" Link="System\DisposableBase.cs" />
 		<Compile Include="..\System\ObservableDisposableBase.cs" Link="System\ObservableDisposableBase.cs" />
 		<Compile Include="..\System\VisitorStrategy.cs" Link="System\VisitorStrategy.cs" />
+		<Compile Include="C:\Users\Personal\Documents\Projects\PaulBraetz\RhoMicro.Common\System\Comparers\ArrayEqualityComparer.cs" Link="System\Comparers\ArrayEqualityComparer.cs" />
+		<Compile Include="C:\Users\Personal\Documents\Projects\PaulBraetz\RhoMicro.Common\System\Comparers\EnumerationEqualityComparer.cs" Link="System\Comparers\EnumerationEqualityComparer.cs" />
+		<Compile Include="C:\Users\Personal\Documents\Projects\PaulBraetz\RhoMicro.Common\System\Security\Cryptography\Hashing\Abstractions\DefaultAlgorithmBase.cs" Link="System\Security\Cryptography\Hashing\Abstractions\DefaultAlgorithmBase.cs" />
+		<Compile Include="C:\Users\Personal\Documents\Projects\PaulBraetz\RhoMicro.Common\System\Security\Cryptography\Hashing\Abstractions\IAlgorithm.cs" Link="System\Security\Cryptography\Hashing\Abstractions\IAlgorithm.cs" />
+		<Compile Include="C:\Users\Personal\Documents\Projects\PaulBraetz\RhoMicro.Common\System\Security\Cryptography\Hashing\Abstractions\IHash.cs" Link="System\Security\Cryptography\Hashing\Abstractions\IHash.cs" />
+		<Compile Include="C:\Users\Personal\Documents\Projects\PaulBraetz\RhoMicro.Common\System\Security\Cryptography\Hashing\Abstractions\IHashedData.cs" Link="System\Security\Cryptography\Hashing\Abstractions\IHashedData.cs" />
+		<Compile Include="C:\Users\Personal\Documents\Projects\PaulBraetz\RhoMicro.Common\System\Security\Cryptography\Hashing\AlgorithmStrategy.cs" Link="System\Security\Cryptography\Hashing\AlgorithmStrategy.cs" />
+		<Compile Include="C:\Users\Personal\Documents\Projects\PaulBraetz\RhoMicro.Common\System\Security\Cryptography\Hashing\Comparers\HashedDataEqualityComparer.cs" Link="System\Security\Cryptography\Hashing\Comparers\HashedDataEqualityComparer.cs" />
+		<Compile Include="C:\Users\Personal\Documents\Projects\PaulBraetz\RhoMicro.Common\System\Security\Cryptography\Hashing\Comparers\HashEqualityComparer.cs" Link="System\Security\Cryptography\Hashing\Comparers\HashEqualityComparer.cs" />
+		<Compile Include="C:\Users\Personal\Documents\Projects\PaulBraetz\RhoMicro.Common\System\Security\Cryptography\Hashing\DefaultAlgorithmStrategy.cs" Link="System\Security\Cryptography\Hashing\DefaultAlgorithmStrategy.cs" />
+		<Compile Include="C:\Users\Personal\Documents\Projects\PaulBraetz\RhoMicro.Common\System\Security\Cryptography\Hashing\Extensions.cs" Link="System\Security\Cryptography\Hashing\Extensions.cs" />
+		<Compile Include="C:\Users\Personal\Documents\Projects\PaulBraetz\RhoMicro.Common\System\Security\Cryptography\Hashing\Hash.cs" Link="System\Security\Cryptography\Hashing\Hash.cs" />
+		<Compile Include="C:\Users\Personal\Documents\Projects\PaulBraetz\RhoMicro.Common\System\Security\Cryptography\Hashing\HashedData.cs" Link="System\Security\Cryptography\Hashing\HashedData.cs" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="RhoMicro.Fort" Version="1.1.1" />
+		<PackageReference Include="Microsoft.Bcl.HashCode" Version="1.1.1" />
+		<PackageReference Include="RhoMicro.Fort" Version="1.2.0" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<Folder Include="System\Abstractions\" />
+		<Folder Include="System\Comparers\" />
+		<Folder Include="System\Security\Cryptography\Hashing\Abstractions\" />
+		<Folder Include="System\Security\Cryptography\Hashing\Comparers\" />
 	</ItemGroup>
 
 	<ItemGroup>
