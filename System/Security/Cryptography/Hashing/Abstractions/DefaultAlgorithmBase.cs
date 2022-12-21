@@ -1,5 +1,6 @@
 ﻿using Fort;
 using System;
+using System.IO;
 using System.Security.Cryptography;
 
 namespace RhoMicro.Common.System.Security.Cryptography.Hashing.Abstractions
@@ -49,6 +50,18 @@ namespace RhoMicro.Common.System.Security.Cryptography.Hashing.Abstractions
 			return result;
 		}
 		/// <summary>
+		/// Creates a strategy-based algorithm based on a built-in hashing algorithm.
+		/// </summary>
+		/// <param name="serializeStrategy">The strategy used to serialize an instance of <typeparamref name="T"/> into a stream.</param>
+		/// <param name="algorithm">The algorithm used to hash the bytes produced by <paramref name="serializeStrategy"/>.</param>
+		/// <returns>An instance of <see cref="IAlgorithm{T}"/>, based on <paramref name="serializeStrategy"/> and <paramref name="algorithm"/>.</returns>
+		public static IAlgorithm<T> Create(Func<T, Stream> serializeStrategy, BuiltinAlgorithm algorithm)
+		{
+			var result = new DefaultAlgorithmStrategy<T>(serializeStrategy, algorithm);
+
+			return result;
+		}
+		/// <summary>
 		/// Creates a strategy-based algorithm.
 		/// </summary>
 		/// <param name="hashingStrategy">The strategy used to hash instances of <typeparamref name="T"/>.</param>
@@ -66,17 +79,32 @@ namespace RhoMicro.Common.System.Security.Cryptography.Hashing.Abstractions
 		/// <param name="plainData">The data to convert.</param>
 		/// <returns>An array of bytes representing <paramref name="plainData"/>.</returns>
 		protected abstract Byte[] Convert(T plainData);
+		/// <summary>
+		/// Serializes plain data into a stream.
+		/// </summary>
+		/// <remarks>
+		/// Overriding this method will prevent <see cref="Convert(T)"/> from being called.
+		/// </remarks>
+		/// <param name="plainData">The data to be serialized.</param>
+		/// <returns>A stream, containing serialized data.</returns>
+		protected virtual Stream Serialize(T plainData)
+		{
+			var bytes = Convert(plainData);
+			var result = new MemoryStream(bytes, false);
+
+			return result;
+		}
 
 		/// <inheritdoc/>
 		public IHash<T> Hash(T plainData)
 		{
 			plainData.ThrowIfDefault(nameof(plainData));
 
-			Byte[] bytes = Convert(plainData);
+			var stream = Serialize(plainData);
 			Byte[] hashBytes = null;
 			using (var algorithm = HashAlgorithm.Create(_algorithm.ToString()))
 			{
-				hashBytes = algorithm.ComputeHash(bytes);
+				hashBytes = algorithm.ComputeHash(stream);
 			}
 
 			var result = new Hash<T>(hashBytes, this);
