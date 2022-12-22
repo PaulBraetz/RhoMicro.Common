@@ -33,7 +33,7 @@ namespace RhoMicro.Common.System.Security.Cryptography.Hashing.Comparers
 			}
 
 			Boolean result = ArrayEqualityComparer<Byte>.Instance.Equals(x.Value, y.Value) &&
-						 EqualityComparer<IAlgorithm<T>>.Default.Equals(x.Algorithm);
+						 EqualityComparer<IAlgorithm<T>>.Default.Equals(x.Algorithm, y.Algorithm);
 
 			return result;
 		}

@@ -30,6 +30,13 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<None Include="..\LICENSE.txt">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
 		<Compile Include="..\IO\Extensions.cs" Link="IO\Extensions.cs" />
 		<Compile Include="..\IO\TemporaryDirectory.cs" Link="IO\TemporaryDirectory.cs" />
 		<Compile Include="..\System\Abstractions\IObservableDisposableBase.cs" Link="System\Abstractions\IObservableDisposableBase.cs" />
@@ -38,19 +45,19 @@
 		<Compile Include="..\System\DisposableBase.cs" Link="System\DisposableBase.cs" />
 		<Compile Include="..\System\ObservableDisposableBase.cs" Link="System\ObservableDisposableBase.cs" />
 		<Compile Include="..\System\VisitorStrategy.cs" Link="System\VisitorStrategy.cs" />
-		<Compile Include="C:\Users\Personal\Documents\Projects\PaulBraetz\RhoMicro.Common\System\Comparers\ArrayEqualityComparer.cs" Link="System\Comparers\ArrayEqualityComparer.cs" />
-		<Compile Include="C:\Users\Personal\Documents\Projects\PaulBraetz\RhoMicro.Common\System\Comparers\EnumerationEqualityComparer.cs" Link="System\Comparers\EnumerationEqualityComparer.cs" />
-		<Compile Include="C:\Users\Personal\Documents\Projects\PaulBraetz\RhoMicro.Common\System\Security\Cryptography\Hashing\Abstractions\DefaultAlgorithmBase.cs" Link="System\Security\Cryptography\Hashing\Abstractions\DefaultAlgorithmBase.cs" />
-		<Compile Include="C:\Users\Personal\Documents\Projects\PaulBraetz\RhoMicro.Common\System\Security\Cryptography\Hashing\Abstractions\IAlgorithm.cs" Link="System\Security\Cryptography\Hashing\Abstractions\IAlgorithm.cs" />
-		<Compile Include="C:\Users\Personal\Documents\Projects\PaulBraetz\RhoMicro.Common\System\Security\Cryptography\Hashing\Abstractions\IHash.cs" Link="System\Security\Cryptography\Hashing\Abstractions\IHash.cs" />
-		<Compile Include="C:\Users\Personal\Documents\Projects\PaulBraetz\RhoMicro.Common\System\Security\Cryptography\Hashing\Abstractions\IHashedData.cs" Link="System\Security\Cryptography\Hashing\Abstractions\IHashedData.cs" />
-		<Compile Include="C:\Users\Personal\Documents\Projects\PaulBraetz\RhoMicro.Common\System\Security\Cryptography\Hashing\AlgorithmStrategy.cs" Link="System\Security\Cryptography\Hashing\AlgorithmStrategy.cs" />
-		<Compile Include="C:\Users\Personal\Documents\Projects\PaulBraetz\RhoMicro.Common\System\Security\Cryptography\Hashing\Comparers\HashedDataEqualityComparer.cs" Link="System\Security\Cryptography\Hashing\Comparers\HashedDataEqualityComparer.cs" />
-		<Compile Include="C:\Users\Personal\Documents\Projects\PaulBraetz\RhoMicro.Common\System\Security\Cryptography\Hashing\Comparers\HashEqualityComparer.cs" Link="System\Security\Cryptography\Hashing\Comparers\HashEqualityComparer.cs" />
-		<Compile Include="C:\Users\Personal\Documents\Projects\PaulBraetz\RhoMicro.Common\System\Security\Cryptography\Hashing\DefaultAlgorithmStrategy.cs" Link="System\Security\Cryptography\Hashing\DefaultAlgorithmStrategy.cs" />
-		<Compile Include="C:\Users\Personal\Documents\Projects\PaulBraetz\RhoMicro.Common\System\Security\Cryptography\Hashing\Extensions.cs" Link="System\Security\Cryptography\Hashing\Extensions.cs" />
-		<Compile Include="C:\Users\Personal\Documents\Projects\PaulBraetz\RhoMicro.Common\System\Security\Cryptography\Hashing\Hash.cs" Link="System\Security\Cryptography\Hashing\Hash.cs" />
-		<Compile Include="C:\Users\Personal\Documents\Projects\PaulBraetz\RhoMicro.Common\System\Security\Cryptography\Hashing\HashedData.cs" Link="System\Security\Cryptography\Hashing\HashedData.cs" />
+		<Compile Include="..\System\Comparers\ArrayEqualityComparer.cs" Link="System\Comparers\ArrayEqualityComparer.cs" />
+		<Compile Include="..\System\Comparers\EnumerationEqualityComparer.cs" Link="System\Comparers\EnumerationEqualityComparer.cs" />
+		<Compile Include="..\System\Security\Cryptography\Hashing\Abstractions\DefaultAlgorithmBase.cs" Link="System\Security\Cryptography\Hashing\Abstractions\DefaultAlgorithmBase.cs" />
+		<Compile Include="..\System\Security\Cryptography\Hashing\Abstractions\IAlgorithm.cs" Link="System\Security\Cryptography\Hashing\Abstractions\IAlgorithm.cs" />
+		<Compile Include="..\System\Security\Cryptography\Hashing\Abstractions\IHash.cs" Link="System\Security\Cryptography\Hashing\Abstractions\IHash.cs" />
+		<Compile Include="..\System\Security\Cryptography\Hashing\Abstractions\IHashedData.cs" Link="System\Security\Cryptography\Hashing\Abstractions\IHashedData.cs" />
+		<Compile Include="..\System\Security\Cryptography\Hashing\AlgorithmStrategy.cs" Link="System\Security\Cryptography\Hashing\AlgorithmStrategy.cs" />
+		<Compile Include="..\System\Security\Cryptography\Hashing\Comparers\HashedDataEqualityComparer.cs" Link="System\Security\Cryptography\Hashing\Comparers\HashedDataEqualityComparer.cs" />
+		<Compile Include="..\System\Security\Cryptography\Hashing\Comparers\HashEqualityComparer.cs" Link="System\Security\Cryptography\Hashing\Comparers\HashEqualityComparer.cs" />
+		<Compile Include="..\System\Security\Cryptography\Hashing\DefaultAlgorithmStrategy.cs" Link="System\Security\Cryptography\Hashing\DefaultAlgorithmStrategy.cs" />
+		<Compile Include="..\System\Security\Cryptography\Hashing\Extensions.cs" Link="System\Security\Cryptography\Hashing\Extensions.cs" />
+		<Compile Include="..\System\Security\Cryptography\Hashing\Hash.cs" Link="System\Security\Cryptography\Hashing\Hash.cs" />
+		<Compile Include="..\System\Security\Cryptography\Hashing\HashedData.cs" Link="System\Security\Cryptography\Hashing\HashedData.cs" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -63,13 +70,6 @@
 		<Folder Include="System\Comparers\" />
 		<Folder Include="System\Security\Cryptography\Hashing\Abstractions\" />
 		<Folder Include="System\Security\Cryptography\Hashing\Comparers\" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<None Include="..\LICENSE.txt">
-			<Pack>True</Pack>
-			<PackagePath>\</PackagePath>
-		</None>
 	</ItemGroup>
 
 </Project>

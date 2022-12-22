@@ -29,18 +29,26 @@ namespace RhoMicro.Common.System.Comparers
 			}
 
 			Boolean result = true;
-			EqualityComparer<T> comparer = EqualityComparer<T>.Default;
-			IEnumerator<T> xEnumerator = x.GetEnumerator();
-			IEnumerator<T> yEnumerator = y.GetEnumerator();
-			Boolean andMoved = true;
-			while (andMoved)
+			var comparer = EqualityComparer<T>.Default;
+			var xEnumerator = x.GetEnumerator();
+			var yEnumerator = y.GetEnumerator();
+			while (result)
 			{
 				Boolean xMoved = xEnumerator.MoveNext();
 				Boolean yMoved = yEnumerator.MoveNext();
-				andMoved = xMoved && yMoved;
-				Boolean xnorMoved = !(xMoved ^ yMoved);
 
-				result = xnorMoved && (!andMoved || comparer.Equals(xEnumerator.Current, yEnumerator.Current));
+				if (xMoved && yMoved)
+				{
+					result = comparer.Equals(xEnumerator.Current, yEnumerator.Current);
+				}
+				else if (xMoved ^ yMoved)
+				{
+					result = false;
+				}
+				else
+				{
+					break;
+				}
 			}
 
 			return result;
