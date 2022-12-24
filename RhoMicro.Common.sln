@@ -21,6 +21,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.Security.Cryptograph
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.Security.Cryptography.Hashing.Argon", "System.Security.Cryptography.Hashing.Argon\System.Security.Cryptography.Hashing.Argon.csproj", "{6EE44F63-221F-4D06-AACB-7FDF6FF0E79D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Math.Statistics", "Math.Statistics\Math.Statistics.csproj", "{2A3AC9FB-AA3A-4A68-841A-7EC949398700}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Math.Statistics.Tests", "Math.Statistics.Tests\Math.Statistics.Tests.csproj", "{F2C55320-669E-49A8-B6F6-1821B8F32194}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +67,14 @@ Global
 		{6EE44F63-221F-4D06-AACB-7FDF6FF0E79D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6EE44F63-221F-4D06-AACB-7FDF6FF0E79D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6EE44F63-221F-4D06-AACB-7FDF6FF0E79D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A3AC9FB-AA3A-4A68-841A-7EC949398700}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A3AC9FB-AA3A-4A68-841A-7EC949398700}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A3AC9FB-AA3A-4A68-841A-7EC949398700}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A3AC9FB-AA3A-4A68-841A-7EC949398700}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2C55320-669E-49A8-B6F6-1821B8F32194}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2C55320-669E-49A8-B6F6-1821B8F32194}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2C55320-669E-49A8-B6F6-1821B8F32194}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2C55320-669E-49A8-B6F6-1821B8F32194}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

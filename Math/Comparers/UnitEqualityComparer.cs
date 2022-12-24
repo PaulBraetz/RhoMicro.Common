@@ -19,14 +19,12 @@ namespace RhoMicro.Common.Math.Comparers
 		/// <inheritdoc/>
 		public Boolean Equals(IUnit x, IUnit y)
 		{
-			if (x == null)
+			if(Object.ReferenceEquals(x, y))
 			{
-				return y == null;
-			}
-
-			if (y == null)
+				return true;
+			}else if(x == null || y == null)
 			{
-				return x == null;
+				return false;
 			}
 
 			Boolean result = x.Name == y.Name;

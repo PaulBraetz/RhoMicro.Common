@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net7</TargetFramework>
+		<AssemblyName>RhoMicro.Common.$(MSBuildProjectName)</AssemblyName>
+		<RootNamespace>RhoMicro.Common.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Bcl.HashCode" Version="1.1.1" />
+		<PackageReference Include="RhoMicro.Fort" Version="1.2.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Math\Math.csproj" />
+	  <ProjectReference Include="..\System\System.csproj" />
+	</ItemGroup>
+
+</Project>
