@@ -13,15 +13,34 @@ namespace RhoMicro.Common.Math.Statistics
 {
 	internal sealed class EmpiricalStatistic<T> : IEmpiricalStatistic<T>
 	{
-
-		internal EmpiricalStatistic(IDictionary<T, IFrequencyDatum<T>> frequencies)
+		public EmpiricalStatistic(EmpiricalStatisticInitializer<T> initializer)
 		{
-			_frequencies = frequencies;
+			initializer.ThrowIfDefault(nameof(initializer));
+
+			_frequencies = initializer.Frequencies;
+
+			Range = initializer.Range;
+			Maximum = initializer.Maximum;
+			Minimum = initializer.Minimum;
+
+			SampleSize = initializer.SampleSize;
+
+			ArithmeticMean = initializer.ArithmeticMean;
+			GeometricMean = initializer.GeometricMean;
+			QuadraticMean = initializer.QuadraticMean;
+			HarmonicMean = initializer.HarmonicMean;
+
+			Modal = initializer.Modal;
+			Median = initializer.Median;
+
+			Variance = initializer.Variance;
+			StandardDeviation = initializer.StandardDeviation;
+			VariationCoefficient = initializer.VariationCoefficient;
 		}
 
 		private readonly IDictionary<T, IFrequencyDatum<T>> _frequencies;
 
-		public IEnumerable<T> Samples
+		public IEnumerable<T> DistinctSamples
 		{
 			get
 			{
@@ -31,7 +50,7 @@ namespace RhoMicro.Common.Math.Statistics
 				}
 			}
 		}
-		public IEnumerable<T> DistinctSamples
+		public IEnumerable<T> Samples
 		{
 			get
 			{
@@ -45,24 +64,24 @@ namespace RhoMicro.Common.Math.Statistics
 			}
 		}
 
-		public T Range { get; internal init; }
-		public T Maximum { get; internal init; }
-		public T Minimum { get; internal init; }
+		public T Range { get; }
+		public T Maximum { get; }
+		public T Minimum { get; }
 
-		public Int32 SampleSize { get; internal init; }
+		public Int32 SampleSize { get; }
 		public Int32 DistinctSampleSize => _frequencies.Count;
 
-		public T ArithmeticMean { get; internal init; }
-		public T GeometricMean { get; internal init; }
-		public T HarmonicMean { get; internal init; }
-		public T QuadraticMean { get; internal init; }
+		public T ArithmeticMean { get; }
+		public T GeometricMean { get; }
+		public T HarmonicMean { get; }
+		public T QuadraticMean { get; }
 
-		public T Modal { get; internal init; }
-		public T Median { get; internal init; }
+		public T Modal { get; }
+		public T Median { get; }
 
-		public T Variance { get; internal init; }
-		public T StandardDeviation { get; internal init; }
-		public T VariationCoefficient { get; internal init; }
+		public T Variance { get; }
+		public T StandardDeviation { get; }
+		public T VariationCoefficient { get; }
 
 		public T GetEmpiricalQuantile(Double relativeFrequency)
 		{

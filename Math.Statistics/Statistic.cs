@@ -12,129 +12,60 @@ namespace RhoMicro.Common.Math.Statistics
 {
 	public static class Statistic
 	{
+		/// <summary>
+		/// Creates a new empirical statistic from a dataset.
+		/// </summary>
+		/// <typeparam name="T">The type of sample analyzed.</typeparam>
+		/// <param name="samples">The samples to analyze.</param>
+		/// <param name="divisionFunction1"></param>
+		/// <param name="divisionFunction2"></param>
+		/// <param name="comparer"></param>
+		/// <returns></returns>
 		public static IEmpiricalStatistic<T> Create<T>(IEnumerable<T> samples,
 													   Func<T, Int32, T> divisionFunction1,
-													   Func<Int32, T, T> divisionFunction2)
+													   Func<Int32, T, T> divisionFunction2,
+													   IComparer<T> comparer = null)
 			where T : INumber<T>, IRootFunctions<T>
 		{
-			var result = Create(samples,
-								(t1, t2) => t1 + t2,
-								(t1, t2) => t1 - t2,
-								(t1, t2) => t1 * t2,
-								divisionFunction1 ?? fallbackDivision1,
-								divisionFunction2 ?? fallbackDivision2,
-								(t1, t2) => t1 / t2,
-								(t, i) => T.RootN(t, i),
-								(t1, t2) => t1 == t2);
+			samples.ThrowIfDefaultOrEmpty(nameof(samples));
+			divisionFunction1.ThrowIfDefault(nameof(divisionFunction1));
+			divisionFunction2.ThrowIfDefault(nameof(divisionFunction2));
+
+			var operators = new OperatorStrategies<T>()
+			{
+				Comparer = comparer ?? Comparer<T>.Default,
+				AdditionFunction = (t1, t2) => t1 + t2,
+				SubstractionFunction = (t1, t2) => t1 - t2,
+				ProductFunction = (t1, t2) => t1 * t2,
+				DivisionFunction1 = divisionFunction1,
+				DivisionFunction2 = divisionFunction2,
+				DivisionFunction3 = (t1, t2) => t1 / t2,
+				RootFunction = (t, i) => T.RootN(t, i),
+				EqualityFunction = (t1, t2) => t1 == t2
+			};
+
+			var result = Create(samples, operators);
 
 			return result;
-
-			T fallbackDivision1(T t, Int32 i)
-			{
-				throw new NotSupportedException();
-			}
-			T fallbackDivision2(Int32 i, T t)
-			{
-				throw new NotSupportedException();
-			}
 		}
+
 		private static IEmpiricalStatistic<T> Create<T>(IEnumerable<T> samples,
-													   Func<T, T, T> additionFunction,
-													   Func<T, T, T> substractionFunction,
-													   Func<T, T, T> productFunction,
-													   Func<T, Int32, T> divisionFunction1,
-													   Func<Int32, T, T> divisionFunction2,
-													   Func<T, T, T> divisionFunction3,
-													   Func<T, Int32, T> rootFunction,
-													   Func<T, T, Boolean> equalityFunction)
+														IOperatorStrategies<T> operators)
 		{
 			samples.ThrowIfDefaultOrEmpty(nameof(samples));
+			operators.ThrowIfDefault(nameof(operators));
 
-			var minimum = default(T);
-			var maximum = default(T);
-
-			T sum = default;
-			T product = default;
-			T inverseSum = default;
-			T quadraticSum = default;
-
-			var context = new EmpiricalStatisticsCreationContext<T>();
+			var builder = new EmpiricalStatisticInitializerBuilder<T>(operators);
 
 			foreach (var sample in samples)
 			{
-				context.AddSample(sample);
+				builder.AddSample(sample);
 			}
 
-			var frequencies = context.GetFrequencies();
-
-			var range = substractionFunction.Invoke(maximum, minimum);
-
-			var tt = frequencies.Sum(v => v.Value.RelativeFrequency);
-
-			var arithmeticMean = divisionFunction1.Invoke(sum, context.SampleSize);
-			var geometricMean = rootFunction.Invoke(product, context.SampleSize);
-			var harmonicMean = divisionFunction2.Invoke(context.SampleSize, inverseSum);
-			var quadraticMean = rootFunction.Invoke(divisionFunction1.Invoke(quadraticSum, context.SampleSize), 2);
-
-			var median = frequencies.ElementAt(context.SampleSize / 2).Key;
-
-			T viSquaredSum = default;
-			foreach (var sample in frequencies)
-			{
-				var vi = substractionFunction.Invoke(sample.Key, arithmeticMean);
-				var viSquared = productFunction.Invoke(vi, vi);
-				plus(ref viSquaredSum, viSquared, default);
-			}
-
-			var variance = divisionFunction1.Invoke(viSquaredSum, context.SampleSize - 1);
-			var standardDeviation = rootFunction.Invoke(variance, 2);
-
-			var variationCoefficient = divisionFunction3.Invoke(standardDeviation, arithmeticMean);
-
-			var result = new EmpiricalStatistic<T>(frequencies)
-			{
-				Range = range,
-				Maximum = maximum,
-				Minimum = minimum,
-
-				SampleSize = context.SampleSize,
-
-				ArithmeticMean = arithmeticMean,
-				GeometricMean = geometricMean,
-				HarmonicMean = harmonicMean,
-				QuadraticMean = quadraticMean,
-
-				Modal = context.Modal.Sample,
-				Median = median,
-
-				Variance = variance,
-				StandardDeviation = standardDeviation,
-				VariationCoefficient = variationCoefficient
-			};
+			var initializer = builder.Build();
+			var result = new EmpiricalStatistic<T>(initializer);
 
 			return result;
-			void plus(ref T sum, T value, T defaultValue)
-			{
-				if (equalityFunction.Invoke(sum, defaultValue))
-				{
-					sum = value;
-				}
-				else
-				{
-					sum = additionFunction.Invoke(sum, value);
-				}
-			}
-			void multiply(ref T product, T factor, T defaultProduct)
-			{
-				if (equalityFunction.Invoke(product, defaultProduct))
-				{
-					product = factor;
-				}
-				else
-				{
-					product = productFunction.Invoke(product, factor);
-				}
-			}
 		}
 	}
 }
