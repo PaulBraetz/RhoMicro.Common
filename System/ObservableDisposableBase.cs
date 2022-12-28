@@ -1,17 +1,4 @@
-﻿
-/* Unmerged change from project 'System'
-Before:
-using System;
-using System.Collections.Generic;
-using System.Text;
-using RhoMicro.Common.System.Abstractions;
-After:
-using RhoMicro.Common.System.Abstractions;
-using System;
-using System.Collections.Generic;
-using RhoMicro.Common.System.Text;
-*/
-using RhoMicro.Common.System.Abstractions;
+﻿using RhoMicro.Common.System.Abstractions;
 using System;
 
 namespace RhoMicro.Common.System

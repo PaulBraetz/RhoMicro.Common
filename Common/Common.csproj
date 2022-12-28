@@ -10,7 +10,7 @@
 		<Authors>Paul Braetz</Authors>
 		<Description>Common types used in RhoMicro projects.</Description>
 		<Website>https.ww.github.com/PaulBraetz/RhoMicro.Common</Website>
-		<Version>1.5.0</Version>
+		<Version>1.6.0</Version>
 		<IncludeSymbols>True</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
@@ -39,6 +39,7 @@
 	<ItemGroup>
 		<Compile Include="..\IO\Extensions.cs" Link="IO\Extensions.cs" />
 		<Compile Include="..\IO\TemporaryDirectory.cs" Link="IO\TemporaryDirectory.cs" />
+		<Compile Include="..\System\Abstractions\IAsyncVisitor.cs" Link="System\Abstractions\IAsyncVisitor.cs" />
 		<Compile Include="..\System\Abstractions\IObservableDisposableBase.cs" Link="System\Abstractions\IObservableDisposableBase.cs" />
 		<Compile Include="..\System\Abstractions\IVisitor.cs" Link="System\Abstractions\IVisitor.cs" />
 		<Compile Include="..\System\Abstractions\VisitorBase.cs" Link="System\Abstractions\VisitorBase.cs" />
