@@ -3,6 +3,7 @@ using RhoMicro.Common.Math.Abstractions;
 using RhoMicro.Common.Math.Comparers;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -12,6 +13,7 @@ namespace RhoMicro.Common.Math
 	/// Default implementation of <see cref="IBoundedInterval{T}"/>.
 	/// </summary>
 	/// <typeparam name="T">The type of values represented by the interval.</typeparam>
+	[DebuggerDisplay("{ToString()}")]
 	public readonly struct BoundedInterval<T> : IBoundedInterval<T>, IEquatable<IBoundedInterval<T>>
 	{
 		private BoundedInterval(T leftBound, T rightBound, Boolean leftClosed = true, Boolean rightClosed = false)

@@ -2,6 +2,7 @@
 using RhoMicro.Common.Math.Comparers;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace RhoMicro.Common.Math
@@ -10,6 +11,7 @@ namespace RhoMicro.Common.Math
 	/// Default implementation of <see cref="ILeftBoundedInterval{T}"/>.
 	/// </summary>
 	/// <typeparam name="T">The type of values represented by the interval.</typeparam>
+	[DebuggerDisplay("{ToString()}")]
 	public readonly struct LeftBoundedInterval<T> : ILeftBoundedInterval<T>, IEquatable<ILeftBoundedInterval<T>>
 	{
 		private LeftBoundedInterval(T leftBound, Boolean leftClosed)

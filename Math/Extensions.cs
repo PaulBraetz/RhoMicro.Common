@@ -208,10 +208,9 @@ namespace RhoMicro.Common.Math
 		public static Boolean Contains<T>(this ILeftBoundedInterval<T> interval, T value, IComparer<T> comparer)
 		{
 			interval.ThrowIfDefault(nameof(interval));
-			value.ThrowIfDefault(nameof(value));
 			comparer.ThrowIfDefault(nameof(comparer));
 
-			var result = comparer.Compare(value, interval.LeftBound) >= (interval.LeftClosed ? 0 : 1);
+			var result = LeftBoundContains(interval, value, comparer);
 
 			return result;
 		}
@@ -225,7 +224,6 @@ namespace RhoMicro.Common.Math
 		public static Boolean Contains<T>(this ILeftBoundedInterval<T> interval, T value)
 		{
 			interval.ThrowIfDefault(nameof(interval));
-			value.ThrowIfDefault(nameof(value));
 
 			var result = interval.Contains(value, Comparer<T>.Default);
 
@@ -243,10 +241,9 @@ namespace RhoMicro.Common.Math
 		public static Boolean Contains<T>(this IRightBoundedInterval<T> interval, T value, IComparer<T> comparer)
 		{
 			interval.ThrowIfDefault(nameof(interval));
-			value.ThrowIfDefault(nameof(value));
 			comparer.ThrowIfDefault(nameof(comparer));
 
-			var result = comparer.Compare(value, interval.RightBound) <= (interval.RightClosed ? 0 : 1);
+			var result = RightBoundContains(interval, value, comparer);
 
 			return result;
 		}
@@ -260,7 +257,6 @@ namespace RhoMicro.Common.Math
 		public static Boolean Contains<T>(this IRightBoundedInterval<T> interval, T value)
 		{
 			interval.ThrowIfDefault(nameof(interval));
-			value.ThrowIfDefault(nameof(value));
 
 			var result = interval.Contains(value, Comparer<T>.Default);
 
@@ -278,15 +274,28 @@ namespace RhoMicro.Common.Math
 		public static Boolean Contains<T>(this IBoundedInterval<T> interval, T value, IComparer<T> comparer)
 		{
 			interval.ThrowIfDefault(nameof(interval));
-			value.ThrowIfDefault(nameof(value));
 			comparer.ThrowIfDefault(nameof(comparer));
 
 			var result =
-				comparer.Compare(value, interval.LeftBound) >= (interval.LeftClosed ? 0 : 1) ||
-				comparer.Compare(value, interval.RightBound) <= (interval.RightClosed ? 0 : 1);
+				LeftBoundContains(interval, value, comparer) &&
+				RightBoundContains(interval, value, comparer);
 
 			return result;
 		}
+
+		private static Boolean RightBoundContains<T>(IRightBoundedInterval<T> interval, T value, IComparer<T> comparer)
+		{
+			var result = comparer.Compare(value, interval.RightBound) < (interval.RightClosed ? 1 : 0);
+
+			return result;
+		}
+		private static Boolean LeftBoundContains<T>(ILeftBoundedInterval<T> interval, T value, IComparer<T> comparer)
+		{
+			var result = comparer.Compare(value, interval.LeftBound) > (interval.LeftClosed ? -1 : 0);
+
+			return result;
+		}
+
 		/// <summary>
 		/// Returns wether or not a given left- and right-bounded interval contains a value.
 		/// </summary>
@@ -297,7 +306,6 @@ namespace RhoMicro.Common.Math
 		public static Boolean Contains<T>(this IBoundedInterval<T> interval, T value)
 		{
 			interval.ThrowIfDefault(nameof(interval));
-			value.ThrowIfDefault(nameof(value));
 
 			var result = interval.Contains(value, Comparer<T>.Default);
 
