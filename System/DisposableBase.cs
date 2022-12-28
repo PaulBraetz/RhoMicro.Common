@@ -102,7 +102,7 @@ namespace RhoMicro.Common.System
 		/// <param name="disposing">Will set to <see langword="true"/> when disposing of the instance using <see cref="IDisposable.Dispose"/>; otherwise, <see langword="false"/>.</param>
 		protected virtual void DisposeManaged(Boolean disposing) { }
 		/// <summary>
-		/// Disposes unmanaged state (unmanaged objects) an sets large fields to null.
+		/// Disposes unmanaged state (unmanaged objects) and sets large fields to null.
 		/// </summary>
 		/// <remarks>
 		/// When overriding this method, the finalizer should be overridden, calling <see cref="FinalizeDispose"/>. <br/>

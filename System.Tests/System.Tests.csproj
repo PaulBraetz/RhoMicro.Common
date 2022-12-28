@@ -19,4 +19,8 @@
     <ProjectReference Include="..\System\System.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Linq\" />
+  </ItemGroup>
+
 </Project>

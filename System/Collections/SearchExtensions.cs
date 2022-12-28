@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using SysMath = System.Math;
 
 namespace RhoMicro.Common.System.Collections
 {
@@ -39,7 +40,7 @@ namespace RhoMicro.Common.System.Collections
 						startAccuracy,
 						endElement,
 						endAccuracy,
-						out var a);
+						out _);
 			}
 
 			var center = start + (end - start) / 2;
@@ -56,7 +57,7 @@ namespace RhoMicro.Common.System.Collections
 					a,
 					endElement,
 					endAccuracy,
-					out var _);
+					out _);
 			}
 
 			if (sorted)
@@ -66,7 +67,7 @@ namespace RhoMicro.Common.System.Collections
 					getLeftElement() :
 					getRightElement();
 				var subAccuracy = accuracyPredicate.Invoke(subElement);
-				return getMostAccurate(centerElement, centerAccuracy, subElement, subAccuracy, out var _);
+				return getMostAccurate(centerElement, centerAccuracy, subElement, subAccuracy, out _);
 			}
 			else
 			{
@@ -86,7 +87,7 @@ namespace RhoMicro.Common.System.Collections
 				}
 
 				//fuzzy result
-				return getMostAccurate(leftElement, leftAccuracy, rightElement, rightAccuracy, out var _);
+				return getMostAccurate(leftElement, leftAccuracy, rightElement, rightAccuracy, out _);
 			}
 
 			Boolean set(Int32 index, out Int32 accuracy, out T element)
@@ -113,7 +114,7 @@ namespace RhoMicro.Common.System.Collections
 			}
 			T getMostAccurate(T element1, Int32 accuracy1, T element2, Int32 accuracy2, out Int32 resultAccuracy)
 			{
-				if (Math.Abs(accuracy1) < Math.Abs(accuracy2))
+				if (SysMath.Abs(accuracy1) < SysMath.Abs(accuracy2))
 				{
 					resultAccuracy = accuracy1;
 					return element1;
