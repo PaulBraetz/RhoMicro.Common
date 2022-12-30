@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 
 namespace RhoMicro.Common.System.Abstractions
 {
@@ -12,7 +13,8 @@ namespace RhoMicro.Common.System.Abstractions
 		/// Visits an instance of <typeparamref name="T"/>.
 		/// </summary>
 		/// <param name="obj">The instance to visit.</param>
+		/// <param name="cancellationToken">Token to signalize the visit to exit.</param>
 		/// <returns>A task that will complete upon the visit ending.</returns>
-		Task Visit(T obj);
+		Task VisitAsync(T obj, CancellationToken cancellationToken= default);
 	}
 }

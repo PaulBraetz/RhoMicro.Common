@@ -10,7 +10,7 @@
 		<Authors>Paul Braetz</Authors>
 		<Description>Common types used in RhoMicro projects.</Description>
 		<Website>https.ww.github.com/PaulBraetz/RhoMicro.Common</Website>
-		<Version>1.6.0</Version>
+		<Version>2.0.0</Version>
 		<IncludeSymbols>True</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
@@ -40,10 +40,14 @@
 		<Compile Include="..\IO\Extensions.cs" Link="IO\Extensions.cs" />
 		<Compile Include="..\IO\TemporaryDirectory.cs" Link="IO\TemporaryDirectory.cs" />
 		<Compile Include="..\System\Abstractions\IAsyncVisitor.cs" Link="System\Abstractions\IAsyncVisitor.cs" />
+		<Compile Include="..\System\Abstractions\IBuilder.cs" Link="System\Abstractions\IBuilder.cs" />
+		<Compile Include="..\System\Abstractions\IFactory.cs" Link="System\Abstractions\IFactory.cs" />
 		<Compile Include="..\System\Abstractions\IObservableDisposableBase.cs" Link="System\Abstractions\IObservableDisposableBase.cs" />
 		<Compile Include="..\System\Abstractions\IVisitor.cs" Link="System\Abstractions\IVisitor.cs" />
 		<Compile Include="..\System\Abstractions\VisitorBase.cs" Link="System\Abstractions\VisitorBase.cs" />
 		<Compile Include="..\System\DisposableBase.cs" Link="System\DisposableBase.cs" />
+		<Compile Include="..\System\IO\Extensions.cs" Link="System\IO\Extensions.cs" />
+		<Compile Include="..\System\IO\StreamReadQueue.cs" Link="System\IO\StreamReadQueue.cs" />
 		<Compile Include="..\System\ObservableDisposableBase.cs" Link="System\ObservableDisposableBase.cs" />
 		<Compile Include="..\System\VisitorStrategy.cs" Link="System\VisitorStrategy.cs" />
 		<Compile Include="..\System\Comparers\ArrayEqualityComparer.cs" Link="System\Comparers\ArrayEqualityComparer.cs" />
@@ -69,6 +73,7 @@
 	<ItemGroup>
 		<Folder Include="System\Abstractions\" />
 		<Folder Include="System\Comparers\" />
+		<Folder Include="System\IO\" />
 		<Folder Include="System\Security\Cryptography\Hashing\Abstractions\" />
 		<Folder Include="System\Security\Cryptography\Hashing\Comparers\" />
 	</ItemGroup>

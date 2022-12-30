@@ -38,6 +38,8 @@ namespace System.Tests.Collections.Concurrent
 				.Where(g => g.Count() != 2)
 				.Select(g => String.Join(',', g))
 				.ToArray();
+
+			Assert.Fail();
 		}
 	}
 }
