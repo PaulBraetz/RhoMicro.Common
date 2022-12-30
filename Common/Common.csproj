@@ -10,7 +10,7 @@
 		<Authors>Paul Braetz</Authors>
 		<Description>Common types used in RhoMicro projects.</Description>
 		<Website>https.ww.github.com/PaulBraetz/RhoMicro.Common</Website>
-		<Version>2.0.0</Version>
+		<Version>2.1.0</Version>
 		<IncludeSymbols>True</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
@@ -39,12 +39,14 @@
 	<ItemGroup>
 		<Compile Include="..\IO\Extensions.cs" Link="IO\Extensions.cs" />
 		<Compile Include="..\IO\TemporaryDirectory.cs" Link="IO\TemporaryDirectory.cs" />
+		<Compile Include="..\System\Abstractions\AsyncVisitorBase.cs" Link="System\Abstractions\AsyncVisitorBase.cs" />
 		<Compile Include="..\System\Abstractions\IAsyncVisitor.cs" Link="System\Abstractions\IAsyncVisitor.cs" />
 		<Compile Include="..\System\Abstractions\IBuilder.cs" Link="System\Abstractions\IBuilder.cs" />
 		<Compile Include="..\System\Abstractions\IFactory.cs" Link="System\Abstractions\IFactory.cs" />
 		<Compile Include="..\System\Abstractions\IObservableDisposableBase.cs" Link="System\Abstractions\IObservableDisposableBase.cs" />
 		<Compile Include="..\System\Abstractions\IVisitor.cs" Link="System\Abstractions\IVisitor.cs" />
 		<Compile Include="..\System\Abstractions\VisitorBase.cs" Link="System\Abstractions\VisitorBase.cs" />
+		<Compile Include="..\System\AsyncVisitorStrategy.cs" Link="System\AsyncVisitorStrategy.cs" />
 		<Compile Include="..\System\DisposableBase.cs" Link="System\DisposableBase.cs" />
 		<Compile Include="..\System\IO\Extensions.cs" Link="System\IO\Extensions.cs" />
 		<Compile Include="..\System\IO\StreamReadQueue.cs" Link="System\IO\StreamReadQueue.cs" />
@@ -68,6 +70,7 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Bcl.HashCode" Version="1.1.1" />
 		<PackageReference Include="RhoMicro.Fort" Version="1.2.0" />
+		<PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -34,8 +34,7 @@ namespace RhoMicro.Common.IO
 
 			foreach (DirectoryInfo nestedDirectory in directory.GetDirectories())
 			{
-				cancellationToken.ThrowIfCancellationRequested();
-				nestedDirectory.DeleteRecursively();
+				nestedDirectory.DeleteRecursively(cancellationToken: cancellationToken);
 				directoryDeletedProgress?.Report(nestedDirectory);
 			}
 

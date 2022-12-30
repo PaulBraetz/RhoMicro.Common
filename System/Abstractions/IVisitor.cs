@@ -6,7 +6,7 @@ namespace RhoMicro.Common.System.Abstractions
 	/// Represents an implementation of the visitor pattern.
 	/// </summary>
 	/// <typeparam name="T">The type of objects to visit.</typeparam>
-	public interface IVisitor<T>
+	public interface IVisitor<in T>
 	{
 		/// <summary>
 		/// Visits an instance of <typeparamref name="T"/>.
