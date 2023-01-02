@@ -10,7 +10,7 @@
 		<Authors>Paul Braetz</Authors>
 		<Description>Common types used in RhoMicro projects.</Description>
 		<Website>https.ww.github.com/PaulBraetz/RhoMicro.Common</Website>
-		<Version>2.1.0</Version>
+		<Version>2.3.0</Version>
 		<IncludeSymbols>True</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
@@ -65,6 +65,7 @@
 		<Compile Include="..\System\Security\Cryptography\Hashing\Extensions.cs" Link="System\Security\Cryptography\Hashing\Extensions.cs" />
 		<Compile Include="..\System\Security\Cryptography\Hashing\Hash.cs" Link="System\Security\Cryptography\Hashing\Hash.cs" />
 		<Compile Include="..\System\Security\Cryptography\Hashing\HashedData.cs" Link="System\Security\Cryptography\Hashing\HashedData.cs" />
+		<Compile Include="C:\Users\Personal\Documents\Projects\PaulBraetz\RhoMicro.Common\System\FactoryStrategy.cs" Link="System\FactoryStrategy.cs" />
 	</ItemGroup>
 
 	<ItemGroup>

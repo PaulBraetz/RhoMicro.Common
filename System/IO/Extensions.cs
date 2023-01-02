@@ -82,5 +82,31 @@ namespace RhoMicro.Common.System.IO
 
 			return result;
 		}
+		/// <summary>
+		/// Reads a line of characters, including line break characters, from the text reader and returns the data as a string.
+		/// </summary>
+		/// <param name="reader">The reader to read characters from.</param>
+		/// <returns>The next line from the reader, including line break characters, or null if all characters have been read.</returns>
+		public static String ReadFullLine(this TextReader reader)
+		{
+			var resultBuilder = new StringBuilder();
+
+			Int32 symbol = reader.Peek();
+			if (symbol == -1)
+			{
+				return null;
+			}
+
+			while ((symbol = reader.Read()) != -1)
+			{
+				resultBuilder.Append((Char)symbol);
+				if (symbol == '\n')
+				{
+					break;
+				}
+			}
+
+			return resultBuilder.ToString();
+		}
 	}
 }
