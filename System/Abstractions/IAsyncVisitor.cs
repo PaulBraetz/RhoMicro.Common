@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace RhoMicro.Common.System.Abstractions
@@ -14,7 +15,7 @@ namespace RhoMicro.Common.System.Abstractions
 		/// </summary>
 		/// <param name="obj">The instance to visit.</param>
 		/// <param name="cancellationToken">Token to signalize the visit to exit.</param>
-		/// <returns>A task that will complete upon the visit ending.</returns>
-		Task VisitAsync(T obj, CancellationToken cancellationToken= default);
+		/// <returns>A task which, upon completion, will contain <see langword="true"/> if <paramref name="obj"/> was actually visited; otherwise, <see langword="false"/>.</returns>
+		Task<Boolean> VisitAsync(T obj, CancellationToken cancellationToken = default);
 	}
 }

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace RhoMicro.Common.System.Abstractions
 {
@@ -12,6 +13,7 @@ namespace RhoMicro.Common.System.Abstractions
 		/// Visits an instance of <typeparamref name="T"/>.
 		/// </summary>
 		/// <param name="obj">The instance to visit.</param>
-		void Visit(T obj);
+		/// <returns><see langword="true"/> if <paramref name="obj"/> was succesfully visited; otherwise, <see langword="false"/>.</returns>
+		Boolean Visit(T obj);
 	}
 }

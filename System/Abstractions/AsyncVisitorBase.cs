@@ -30,12 +30,15 @@ namespace RhoMicro.Common.System.Abstractions
 		protected abstract Task Receive(T obj, CancellationToken cancellationToken = default);
 
 		/// <inheritdoc/>
-		public async Task VisitAsync(T obj, CancellationToken cancellationToken = default)
+		public virtual async Task<Boolean> VisitAsync(T obj, CancellationToken cancellationToken = default)
 		{
-			if (await CanReceive(obj, cancellationToken))
+			var result = await CanReceive(obj, cancellationToken);
+			if (result)
 			{
 				await Receive(obj, cancellationToken);
 			}
+
+			return result;
 		}
 
 		/// <summary>
@@ -48,6 +51,18 @@ namespace RhoMicro.Common.System.Abstractions
 		{
 			receiveStrategy.ThrowIfDefault(nameof(receiveStrategy));
 			var result = new AsyncVisitorStrategy<T>(receiveStrategy, canReceiveStrategy);
+
+			return result;
+		}
+		/// <summary>
+		/// Creates a new strategy-based asynchronous visitor for objects of type <typeparamref name="T"/>.
+		/// </summary>
+		/// <param name="visitStrategy">The strategy to invoke when visiting instances of <typeparamref name="T"/>.</param>
+		/// <returns>A new instance of <see cref="IAsyncVisitor{T}"/>, based on the strategy provided.</returns>
+		public static IAsyncVisitor<T> Create(Func<T, CancellationToken, Task<Boolean>> visitStrategy)
+		{
+			visitStrategy.ThrowIfDefault(nameof(visitStrategy));
+			var result = new AsyncVisitorStrategy<T>(visitStrategy);
 
 			return result;
 		}

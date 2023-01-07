@@ -15,7 +15,8 @@ namespace System.Tests.Security.Cryptography.Hashing.Abstractions
 				{
 					"Value 1",
 					String.Empty,
-					"Some Other Value"
+					"Some Other Value",
+					"C7FxkdxUql4tzYb93WaEa7mxbxNhtGI0LhjyIIblgpo"
 				}.SelectMany(
 					b => Enum.GetValues<DefaultAlgorithmBase<String>.BuiltinAlgorithm>()
 						.OfType<DefaultAlgorithmBase<String>.BuiltinAlgorithm>()

@@ -15,10 +15,23 @@ namespace RhoMicro.Common.System
 			_canReceiveStrategy = canReceiveStrategy;
 			_receiveStrategy = receiveStrategy;
 		}
+		public AsyncVisitorStrategy(Func<T, CancellationToken, Task<Boolean>> visitStrategy)
+		{
+			visitStrategy.ThrowIfDefault(nameof(visitStrategy));
+
+			_visitStrategy = visitStrategy;
+		}
 
 		private readonly Func<T, CancellationToken, Task<Boolean>> _canReceiveStrategy;
 		private readonly Func<T, CancellationToken, Task> _receiveStrategy;
+		private readonly Func<T, CancellationToken, Task<Boolean>> _visitStrategy;
 
+		public override Task<Boolean> VisitAsync(T obj, CancellationToken cancellationToken)
+		{
+			var result = _visitStrategy?.Invoke(obj, cancellationToken) ?? base.VisitAsync(obj, cancellationToken);
+
+			return result;
+		}
 		protected override Task<Boolean> CanReceive(T obj, CancellationToken cancellationToken = default)
 		{
 			return _canReceiveStrategy?.Invoke(obj, cancellationToken) ?? base.CanReceive(obj, cancellationToken);

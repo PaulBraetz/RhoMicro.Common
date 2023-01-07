@@ -27,12 +27,15 @@ namespace RhoMicro.Common.System.Abstractions
 		protected abstract void Receive(T obj);
 
 		/// <inheritdoc/>
-		public void Visit(T obj)
+		public virtual Boolean Visit(T obj)
 		{
-			if (CanReceive(obj))
+			var result = CanReceive(obj);
+			if (result)
 			{
 				Receive(obj);
 			}
+
+			return result;
 		}
 
 		/// <summary>
@@ -45,6 +48,18 @@ namespace RhoMicro.Common.System.Abstractions
 		{
 			receiveStrategy.ThrowIfDefault(nameof(receiveStrategy));
 			var result = new VisitorStrategy<T>(receiveStrategy, canReceiveStrategy);
+
+			return result;
+		}
+		/// <summary>
+		/// Creates a new strategy-based visitor for objects of type <typeparamref name="T"/>.
+		/// </summary>
+		/// <param name="visitStrategy">The strategy to invoke when visiting instances of <typeparamref name="T"/>.</param>
+		/// <returns>A new instance of <see cref="IVisitor{T}"/>, based on the strategy provided.</returns>
+		public static IVisitor<T> Create(Func<T, Boolean> visitStrategy)
+		{
+			visitStrategy.ThrowIfDefault(nameof(visitStrategy));
+			var result = new VisitorStrategy<T>(visitStrategy);
 
 			return result;
 		}
