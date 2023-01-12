@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 
 namespace RhoMicro.Common.System.IO
 {
@@ -107,6 +109,118 @@ namespace RhoMicro.Common.System.IO
 			}
 
 			return resultBuilder.ToString();
+		}
+
+		/// <summary>
+		/// Yields bytes returned by reading a stream.
+		/// </summary>
+		/// <remarks>
+		/// <paramref name="stream"/> will be disposed upon there being no more bytes to read.
+		/// </remarks>
+		/// <param name="stream">The stream whoise bytes to yield.</param>
+		/// <param name="bufferSize">The size of the buffer used when reading bytes.</param>
+		/// <param name="yieldIncomplete">When <see langword="true"/>, will yield buffers with length <paramref name="bufferSize"/>; otherwise, it is possible to infinitely attempt to read the stream.</param>
+		/// <param name="cancellationToken">Should be used for instances in which the stream is fully enumerated, as only full buffers will be yielded while the stream can be read from.</param>
+		/// <returns>An enumeration of bytes read from the stream.</returns>
+		public static IEnumerable<Byte[]> AsEnumerable(this Stream stream,
+												 Int32 bufferSize,
+												 Boolean yieldIncomplete = true,
+												 CancellationToken cancellationToken = default)
+		{
+			stream.ThrowIfDefault(nameof(stream));
+			bufferSize.ThrowIfNot(s => s > 0, $"{nameof(bufferSize)} must be > 0.", nameof(bufferSize));
+
+			using (stream)
+			{
+				Byte[] buffer = new Byte[bufferSize];
+				Int32 read = 0;
+				while (stream.CanRead)
+				{
+					if (cancellationToken.IsCancellationRequested)
+					{
+						break;
+					}
+					read += stream.Read(buffer, read, bufferSize - read);
+					if (read == bufferSize)
+					{
+						yield return buffer;
+						
+						buffer = new Byte[bufferSize];
+						read = 0;
+					}else if(yieldIncomplete)
+					{
+						break;
+					}
+				}
+
+				if (!cancellationToken.IsCancellationRequested && yieldIncomplete && read > 0)
+				{
+					Byte[] shortBuffer = new Byte[read];
+					for (var i =0; i < shortBuffer.Length; i++)
+					{
+						shortBuffer[i] = buffer[i];
+					}
+
+					yield return shortBuffer;
+				}
+			}
+		}
+
+
+		/// <summary>
+		/// Yields bytes returned by reading a stream.
+		/// </summary>
+		/// <remarks>
+		/// <paramref name="stream"/> will be disposed upon there being no more bytes to read.
+		/// </remarks>
+		/// <param name="stream">The stream whoise bytes to yield.</param>
+		/// <param name="bufferSize">The size of the buffer used when reading bytes.</param>
+		/// <param name="yieldIncomplete">When <see langword="true"/>, will yield buffers with length <paramref name="bufferSize"/>; otherwise, it is possible to infinitely attempt to read the stream.</param>
+		/// <param name="cancellationToken">Should be used for instances in which the stream is fully enumerated, as only full buffers will be yielded while the stream can be read from.</param>
+		/// <returns>An enumeration of bytes read from the stream.</returns>
+		public static async IAsyncEnumerable<Byte[]> AsAsyncEnumerable(this Stream stream,
+																 Int32 bufferSize,
+																 Boolean yieldIncomplete = true,
+																 [EnumeratorCancellation] CancellationToken cancellationToken = default)
+		{
+			stream.ThrowIfDefault(nameof(stream));
+			bufferSize.ThrowIfNot(s => s > 0, $"{nameof(bufferSize)} must be > 0.", nameof(bufferSize));
+
+			using (stream)
+			{
+				Byte[] buffer = new Byte[bufferSize];
+				Int32 read = 0;
+				while (stream.CanRead)
+				{
+					if (cancellationToken.IsCancellationRequested)
+					{
+						break;
+					}
+					read += await stream.ReadAsync(buffer, read, bufferSize - read, cancellationToken);
+					if (read == bufferSize)
+					{
+						yield return buffer;
+
+						buffer = new Byte[bufferSize];
+						read = 0;
+					}
+					else if (yieldIncomplete)
+					{
+						break;
+					}
+				}
+
+				if (!cancellationToken.IsCancellationRequested && yieldIncomplete && read > 0)
+				{
+					Byte[] shortBuffer = new Byte[read];
+					for (var i = 0; i < shortBuffer.Length; i++)
+					{
+						shortBuffer[i] = buffer[i];
+					}
+
+					yield return shortBuffer;
+				}
+			}
 		}
 	}
 }

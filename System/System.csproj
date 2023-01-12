@@ -5,6 +5,7 @@
 		<AssemblyName>RhoMicro.Common.$(MSBuildProjectName)</AssemblyName>
 		<RootNamespace>RhoMicro.Common.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<LangVersion>8.0</LangVersion>
 	</PropertyGroup>
 
 	<ItemGroup>

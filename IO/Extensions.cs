@@ -82,7 +82,7 @@ namespace RhoMicro.Common.IO
 			{
 				cancellationToken.ThrowIfCancellationRequested();
 				String newSubDirectory = Path.Combine(targetDirectory, subDirectory.Name);
-				subDirectory.CopyRecursively(newSubDirectory, overwrite);
+				subDirectory.CopyRecursively(newSubDirectory, overwrite, fileCopiedProgress, directoryCopiedProgress, cancellationToken);
 				directoryCopiedProgress?.Report(subDirectory);
 			}
 		}
