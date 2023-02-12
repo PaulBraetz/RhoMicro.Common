@@ -11,7 +11,7 @@
 		<Authors>Paul Braetz</Authors>
 		<Description>Common types used in RhoMicro projects.</Description>
 		<Website>https.ww.github.com/PaulBraetz/RhoMicro.Common</Website>
-		<Version>3.3.0</Version>
+		<Version>3.4.0</Version>
 		<IncludeSymbols>True</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
@@ -56,6 +56,7 @@
 		<Compile Include="..\System\IO\LazyFileStream.cs" Link="System\IO\LazyFileStream.cs" />
 		<Compile Include="..\System\IO\StreamReadQueue.cs" Link="System\IO\StreamReadQueue.cs" />
 		<Compile Include="..\System\ObservableDisposableBase.cs" Link="System\ObservableDisposableBase.cs" />
+		<Compile Include="..\System\ValueString.cs" Link="System\ValueString.cs" />
 		<Compile Include="..\System\VisitorStrategy.cs" Link="System\VisitorStrategy.cs" />
 		<Compile Include="..\System\Comparers\ArrayEqualityComparer.cs" Link="System\Comparers\ArrayEqualityComparer.cs" />
 		<Compile Include="..\System\Comparers\EnumerationEqualityComparer.cs" Link="System\Comparers\EnumerationEqualityComparer.cs" />
