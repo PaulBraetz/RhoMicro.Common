@@ -10,6 +10,7 @@ namespace RhoMicro.Common.System.Abstractions
 	/// </summary>
 	/// <typeparam name="TSelf">This type.</typeparam>
 	public interface ICloneable<TSelf> : ICloneable
+		where TSelf : ICloneable<TSelf>
 	{
 		/// <summary>
 		/// Creates a new object that is a copy of the current instance.

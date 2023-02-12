@@ -41,6 +41,7 @@
 		<Compile Include="..\IO\Extensions.cs" Link="IO\Extensions.cs" />
 		<Compile Include="..\IO\TemporaryDirectory.cs" Link="IO\TemporaryDirectory.cs" />
 		<Compile Include="..\System\Abstractions\AsyncVisitorBase.cs" Link="System\Abstractions\AsyncVisitorBase.cs" />
+		<Compile Include="..\System\Abstractions\CloneableBase.cs" Link="System\Abstractions\CloneableBase.cs" />
 		<Compile Include="..\System\Abstractions\IAsyncVisitor.cs" Link="System\Abstractions\IAsyncVisitor.cs" />
 		<Compile Include="..\System\Abstractions\IBuilder.cs" Link="System\Abstractions\IBuilder.cs" />
 		<Compile Include="..\System\Abstractions\ICloneable.cs" Link="System\Abstractions\ICloneable.cs" />
