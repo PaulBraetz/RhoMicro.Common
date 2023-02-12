@@ -9,7 +9,7 @@ namespace RhoMicro.Common.System.Abstractions
 	/// as an existing instance.
 	/// </summary>
 	/// <typeparam name="TSelf">This type.</typeparam>
-	public interface ICloneable<TSelf> : ICloneable
+	public interface ICloneable<out TSelf> : ICloneable
 		where TSelf : ICloneable<TSelf>
 	{
 		/// <summary>
