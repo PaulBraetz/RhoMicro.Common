@@ -11,7 +11,7 @@
 		<Authors>Paul Braetz</Authors>
 		<Description>Common types used in RhoMicro projects.</Description>
 		<Website>https.ww.github.com/PaulBraetz/RhoMicro.Common</Website>
-		<Version>3.4.0</Version>
+		<Version>3.5.0</Version>
 		<IncludeSymbols>True</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
@@ -43,6 +43,7 @@
 		<Compile Include="..\System\Abstractions\AsyncVisitorBase.cs" Link="System\Abstractions\AsyncVisitorBase.cs" />
 		<Compile Include="..\System\Abstractions\IAsyncVisitor.cs" Link="System\Abstractions\IAsyncVisitor.cs" />
 		<Compile Include="..\System\Abstractions\IBuilder.cs" Link="System\Abstractions\IBuilder.cs" />
+		<Compile Include="..\System\Abstractions\ICloneable.cs" Link="System\Abstractions\ICloneable.cs" />
 		<Compile Include="..\System\Abstractions\IConverter.cs" Link="System\Abstractions\IConverter.cs" />
 		<Compile Include="..\System\Abstractions\IFactory.cs" Link="System\Abstractions\IFactory.cs" />
 		<Compile Include="..\System\Abstractions\IObservableDisposableBase.cs" Link="System\Abstractions\IObservableDisposableBase.cs" />
