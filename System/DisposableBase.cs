@@ -1,13 +1,14 @@
 ﻿using Fort;
 using System;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace RhoMicro.Common.System
 {
 	/// <summary>
 	/// Base class for types implementing <see cref="IDisposable"/>.
 	/// </summary>
-	public abstract class DisposableBase : IDisposable
+	public abstract class DisposableBase : IDisposable, IAsyncDisposable
 	{
 		#region Disposed States
 		private const Int32 NOT_DISPOSED = 0;
@@ -30,7 +31,7 @@ namespace RhoMicro.Common.System
 				{
 					OnDiposing();
 				}
-				finally
+				catch
 				{
 					try
 					{
@@ -49,6 +50,8 @@ namespace RhoMicro.Common.System
 
 						throw;
 					}
+					
+					throw;
 				}
 
 				OnDiposed();
@@ -155,6 +158,14 @@ namespace RhoMicro.Common.System
 		{
 			var exception = new ObjectDisposedException(objectName);
 			ThrowIfDisposed(exception);
+		}
+
+		/// <inheritdoc/>
+		public virtual ValueTask DisposeAsync()
+		{
+			Dispose();
+
+			return new ValueTask(Task.CompletedTask);
 		}
 	}
 }

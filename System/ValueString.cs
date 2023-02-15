@@ -14,7 +14,7 @@ namespace RhoMicro.Common.System
 		/// The underlying value. If a the underlying value is <see langword="null"/>, <see cref="String.Empty"/> is returned instead.
 		/// </summary>
 		public String Value => _value ?? String.Empty;
-		private readonly string _value;
+		private readonly String _value;
 
 		/// <summary>
 		/// Initializes a new instance with the value provided.
