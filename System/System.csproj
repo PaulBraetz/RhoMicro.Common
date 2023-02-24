@@ -7,6 +7,10 @@
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<LangVersion>8.0</LangVersion>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="Collections\Generic\Abstractions\IHasGetLast.cs~RF2558b9e.TMP" />
+	</ItemGroup>
 	
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="7.0.0" />
