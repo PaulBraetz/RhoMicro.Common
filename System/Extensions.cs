@@ -17,7 +17,7 @@ namespace RhoMicro.Common.System
 		/// </summary>
 		/// <typeparam name="T">The type of objects to visit.</typeparam>
 		/// <param name="visitor">The visitor to wrap.</param>
-		/// <param name="canVisitStrategy">The strategy to invoke when checking wether or not an instance of <typeparamref name="T"/> may be visited.</param>
+		/// <param name="canVisitStrategy">The strategy to invoke when checking whether or not an instance of <typeparamref name="T"/> may be visited.</param>
 		/// <returns>A new instance of <see cref="IAsyncVisitor{T}"/>.</returns>
 		public static IAsyncVisitor<T> AsAsync<T>(this IVisitor<T> visitor, Func<T, CancellationToken, Task<Boolean>> canVisitStrategy = null)
 		{

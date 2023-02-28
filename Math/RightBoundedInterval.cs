@@ -29,7 +29,7 @@ namespace RhoMicro.Common.Math
 		/// Creates a right-bounded interval.
 		/// </summary>
 		/// <param name="rightBound">The intervals right (usually upper) bound.</param>
-		/// <param name="rightClosed">Indicates wether or not <paramref name="rightBound"/> is to be included in the interval. The default is <see langword="false"/>.</param>
+		/// <param name="rightClosed">Indicates whether or not <paramref name="rightBound"/> is to be included in the interval. The default is <see langword="false"/>.</param>
 		/// <returns>A new right-bounded interval.</returns>
 		public static IRightBoundedInterval<T> Create(T rightBound, Boolean rightClosed)
 		{

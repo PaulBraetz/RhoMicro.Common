@@ -19,7 +19,7 @@ namespace RhoMicro.Common.System
 		private Int32 _disposedValue;
 
 		/// <summary>
-		/// Indicates wether or not the instance has been disposed of.
+		/// Indicates whether or not the instance has been disposed of.
 		/// </summary>
 		protected Boolean IsDisposed => _disposedValue == DISPOSED;
 

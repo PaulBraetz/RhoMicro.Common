@@ -1,4 +1,5 @@
 ﻿using Fort;
+using RhoMicro.Common.System.Collections.Generic.Abstractions;
 using RhoMicro.Common.System.Monads;
 using System;
 using System.Collections;
@@ -11,8 +12,13 @@ using System.Timers;
 
 namespace RhoMicro.Common.System.Collections.Generic
 {
-	public sealed class MaxHeap<T>:
+	public sealed class MaxHeap<T> : IHasSize<Int32>, IHasInsert<T>, IHasRemoveFirst<T>
 	{
+		/// <summary>
+		/// Initializes a new instance with the initial capacity and comparer provided.
+		/// </summary>
+		/// <param name="initialCapacity"></param>
+		/// <param name="comparer"></param>
 		public MaxHeap(Int32 initialCapacity, IComparer<T> comparer)
 		{
 			comparer.ThrowIfNull(nameof(comparer));
@@ -21,7 +27,6 @@ namespace RhoMicro.Common.System.Collections.Generic
 			_comparer = comparer;
 			_heap = new List<T>(initialCapacity);
 		}
-
 		public MaxHeap(IComparer<T> comparer) : this(DEFAULT_INITIAL_SIZE, comparer)
 		{
 
@@ -32,12 +37,9 @@ namespace RhoMicro.Common.System.Collections.Generic
 		private readonly IComparer<T> _comparer;
 		private readonly List<T> _heap;
 
-		/// <summary>
-		/// Gets the current size of the heap.
-		/// </summary>
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 		public Int32 Size => _heap.Count;
-
-		public void Add(T item)
+		public void Insert(T item)
 		{
 			_heap.Insert(0, item);
 			MaxHeapify();
@@ -61,6 +63,8 @@ namespace RhoMicro.Common.System.Collections.Generic
 
 			return head;
 		}
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
+
 		private void MaxHeapify()
 		{
 			var parent = 0;

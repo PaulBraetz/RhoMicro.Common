@@ -32,7 +32,7 @@ namespace RhoMicro.Common.System.IO
 		private readonly Object _syncRoot = new Object();
 
 		/// <summary>
-		/// Indicates wether or not <see cref="BaseStream"/> has been initialized.
+		/// Indicates whether or not <see cref="BaseStream"/> has been initialized.
 		/// </summary>
 		public Boolean IsStreamCreated { get; private set; }
 		/// <summary>

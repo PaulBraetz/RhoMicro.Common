@@ -17,7 +17,7 @@ namespace RhoMicro.Common.System.IO
 		/// Initializes a new instance with the streams provided.
 		/// </summary>
 		/// <param name="streams">The streams to enqueue.</param>
-		/// <param name="manageLifetime">Indicates wether or not to dispose <paramref name="streams"/> after they have been fully read or when this instance is being disposed.</param>
+		/// <param name="manageLifetime">Indicates whether or not to dispose <paramref name="streams"/> after they have been fully read or when this instance is being disposed.</param>
 		public StreamReadQueue(IEnumerable<Stream> streams, Boolean manageLifetime = false)
 		{
 			streams.ThrowIfDefault(nameof(streams));

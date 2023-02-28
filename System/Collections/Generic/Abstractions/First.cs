@@ -5,50 +5,48 @@ using System.Text;
 namespace RhoMicro.Common.System.Collections.Generic.Abstractions
 {
 	/// <summary>
-	/// Provides a method for adding an element at the start of the collection.
+	/// Provides a function for inserting an element at the end of the collection.
 	/// </summary>
 	/// <typeparam name="T">
-	/// The type of elements in the collection.
+	/// The type of elements contained in the collection.
 	/// </typeparam>
-	public interface IHasAddFirst<T>:IEnumerable<T>
+	public interface IHasInsertFirst<T> 
 	{
 		/// <summary>
-		/// Adds an element at the start of the collection.
+		/// Inserts an element at the end of the collection.
 		/// </summary>
 		/// <param name="element">
-		/// The element to add.
+		/// The element to insert.
 		/// </param>
-		void AddFirst(T element);
+		void InsertFirst(T element);
 	}
 	/// <summary>
-	/// Provides a function for attempting to add an element at the start of the collection.
+	/// Provides a function for attempting to insert an element at the end of the collection.
 	/// </summary>
 	/// <typeparam name="T">
-	/// The type of elements in the collection.
+	/// The type of elements contained in the collection.
 	/// </typeparam>
-	public interface IHasTryAddFirst<T> : IEnumerable<T>
+	public interface IHasTryInsertFirst<T> 
 	{
 		/// <summary>
-		/// Attempts to add an element at the start of the collection.
+		/// Attempts to insert an element at the end of the collection.
 		/// </summary>
 		/// <param name="element">
-		/// The element to add.
+		/// The element to insert.
 		/// </param>
 		/// <returns>
-		/// <see langword="true"/>
-		///  if the element was successfully added; otherwise, 
-		/// <see langword="false"/>.
+		/// <see langword="true"/> if the first element was successfully inserted; otherwise, <see langword="false"/>.
 		/// </returns>
-		Boolean TryAddFirst(T element);
+		Boolean TryInsertFirst(T element);
 	}
 
 	/// <summary>
-	/// Provides a method for removing the first element from the collection.
+	/// Provides a function for removing the first element from the collection.
 	/// </summary>
 	/// <typeparam name="T">
-	/// The type of elements in the collection.
+	/// The type of elements contained in the collection.
 	/// </typeparam>
-	public interface IHasRemoveFirst<out T> : IEnumerable<T>
+	public interface IHasRemoveFirst<out T> 
 	{
 		/// <summary>
 		/// Removes the first element from the collection.
@@ -62,9 +60,9 @@ namespace RhoMicro.Common.System.Collections.Generic.Abstractions
 	/// Provides a function for attempting to remove the first element from the collection.
 	/// </summary>
 	/// <typeparam name="T">
-	/// The type of elements in the collection.
+	/// The type of elements contained in the collection.
 	/// </typeparam>
-	public interface IHasTryRemoveFirst<T> : IEnumerable<T>
+	public interface IHasTryRemoveFirst<T> 
 	{
 		/// <summary>
 		/// Attempts to remove the first element from the collection.
@@ -73,9 +71,7 @@ namespace RhoMicro.Common.System.Collections.Generic.Abstractions
 		/// The first element, if it was successfully removed; otherwise, <see langword="default"/>.
 		/// </param>
 		/// <returns>
-		/// <see langword="true"/>
-		///  if the first element was successfully removed; otherwise, 
-		/// <see langword="false"/>.
+		/// <see langword="true"/> if the first element was successfully removed; otherwise, <see langword="false"/>.
 		/// </returns>
 		bool TryRemoveFirst(out T element);
 	}
@@ -84,9 +80,9 @@ namespace RhoMicro.Common.System.Collections.Generic.Abstractions
 	/// Provides a function for retrieving the first element from the collection without removing it.
 	/// </summary>
 	/// <typeparam name="T">
-	/// The type of elements in the collection.
+	/// The type of elements contained in the collection.
 	/// </typeparam>
-	public interface IHasGetFirst<out T> : IEnumerable<T>
+	public interface IHasGetFirst<out T> 
 	{
 		/// <summary>
 		/// Retrieves the first element from the collection without removing it.
@@ -100,9 +96,9 @@ namespace RhoMicro.Common.System.Collections.Generic.Abstractions
 	/// Provides a function for attempting to retrieve the first element from the collection without removing it.
 	/// </summary>
 	/// <typeparam name="T">
-	/// The type of elements in the collection.
+	/// The type of elements contained in the collection.
 	/// </typeparam>
-	public interface IHasTryGetFirst<T> : IEnumerable<T>
+	public interface IHasTryGetFirst<T> 
 	{
 		/// <summary>
 		/// Attempts to retrieve the first element from the collection without removing it.
@@ -111,20 +107,18 @@ namespace RhoMicro.Common.System.Collections.Generic.Abstractions
 		/// The first element, if it was successfully retrieved; otherwise, <see langword="default"/>.
 		/// </param>
 		/// <returns>
-		/// <see langword="true"/>
-		///  if the first element was successfully retrieved; otherwise, 
-		/// <see langword="false"/>.
+		/// <see langword="true"/> if the first element was successfully retrieved; otherwise, <see langword="false"/>.
 		/// </returns>
 		Boolean TryGetFirst(out T element);
 	}
 
 	/// <summary>
-	/// Provides a method for setting the first element in the collection, replacing any previously first element.
+	/// Provides a function for setting the first element in the collection, replacing any previously first element.
 	/// </summary>
 	/// <typeparam name="T">
-	/// The type of elements in the collection.
+	/// The type of elements contained in the collection.
 	/// </typeparam>
-	public interface IHasSetFirst<T> : IEnumerable<T>
+	public interface IHasSetFirst<T> 
 	{
 		/// <summary>
 		/// Sets the first element in the collection, replacing any previously first element.
@@ -132,15 +126,18 @@ namespace RhoMicro.Common.System.Collections.Generic.Abstractions
 		/// <param name="element">
 		/// The element to set.
 		/// </param>
-		void SetFirst(T element);
+		/// <returns>
+		/// The previously first element, if one exists; otherwise, <see langword="default"/>.
+		/// </returns>
+		T SetFirst(T element);
 	}
 	/// <summary>
 	/// Provides a function for attempting to set the first element in the collection, replacing any previously first element.
 	/// </summary>
 	/// <typeparam name="T">
-	/// The type of elements in the collection.
+	/// The type of elements contained in the collection.
 	/// </typeparam>
-	public interface IHasTrySetFirst<T> : IEnumerable<T>
+	public interface IHasTrySetFirst<T> 
 	{
 		/// <summary>
 		/// Attempts to set the first element in the collection, replacing any previously first element.
@@ -148,11 +145,12 @@ namespace RhoMicro.Common.System.Collections.Generic.Abstractions
 		/// <param name="element">
 		/// The element at to set.
 		/// </param>
+		/// <param name="previous">
+		/// The previously first element, if one exists; otherwise, <see langword="default"/>.
+		/// </param>
 		/// <returns>
-		/// <see langword="true"/>
-		///  if the first element was successfully set; otherwise, 
-		/// <see langword="false"/>.
+		/// <see langword="true"/> if the first element was successfully set; otherwise, <see langword="false"/>.
 		/// </returns>
-		Boolean TrySetFirst(T element);
+		Boolean TrySetFirst(T element, out T previous);
 	}
 }

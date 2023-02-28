@@ -14,7 +14,7 @@ namespace RhoMicro.Common.Math
 	public static partial class Extensions
 	{
 		/// <summary>
-		/// Returns wether or not a bounded interval is empty, using <see cref="EqualityComparer{T}.Default"/>.
+		/// Returns whether or not a bounded interval is empty, using <see cref="EqualityComparer{T}.Default"/>.
 		/// </summary>
 		/// <remarks>
 		/// A given bounded interval is defined as empty when its left and right bound are equal and it is not left- and right-closed.
@@ -32,7 +32,7 @@ namespace RhoMicro.Common.Math
 			return result;
 		}
 		/// <summary>
-		/// Returns wether or not a bounded interval is empty.
+		/// Returns whether or not a bounded interval is empty.
 		/// </summary>
 		/// <remarks>
 		/// A given bounded interval is defined as empty when its left and right bound are equal and it is not left- and right-closed.
@@ -52,7 +52,7 @@ namespace RhoMicro.Common.Math
 		}
 
 		/// <summary>
-		/// Returns wether or not a bounded interval is degenerate, that is, walking it would yield exactly one element, using <see cref="EqualityComparer{T}.Default"/>.
+		/// Returns whether or not a bounded interval is degenerate, that is, walking it would yield exactly one element, using <see cref="EqualityComparer{T}.Default"/>.
 		/// </summary>
 		/// <remarks>
 		/// A given bounded interval is defined as degenerate when its left and right bound are equal and it is left- and right-closed.
@@ -70,7 +70,7 @@ namespace RhoMicro.Common.Math
 			return result;
 		}
 		/// <summary>
-		/// Returns wether or not a bounded interval is degenerate, that is, walking it would yield exactly one element.
+		/// Returns whether or not a bounded interval is degenerate, that is, walking it would yield exactly one element.
 		/// </summary>
 		/// <remarks>
 		/// A given bounded interval is defined as degenerate when its left and right bound are equal and it is left- and right-closed.
@@ -95,7 +95,7 @@ namespace RhoMicro.Common.Math
 		/// <typeparam name="T">The type of values represented by the interval.</typeparam>
 		/// <param name="interval">The interval to bind</param>
 		/// <param name="leftBound">The intervals left (usually lower) bound.</param>
-		/// <param name="leftClosed">Indicates wether or not <paramref name="leftBound"/> is to be included in the interval. The default is <see langword="true"/>.</param>
+		/// <param name="leftClosed">Indicates whether or not <paramref name="leftBound"/> is to be included in the interval. The default is <see langword="true"/>.</param>
 		/// <returns>A new left- and right-bounded interval.</returns>
 		public static IBoundedInterval<T> BindLeft<T>(this IRightBoundedInterval<T> interval, T leftBound, Boolean leftClosed = true)
 		{
@@ -125,7 +125,7 @@ namespace RhoMicro.Common.Math
 		/// </summary>
 		/// <param name="interval">The interval to bind</param>
 		/// <param name="rightBound">The intervals right (usually upper) bound.</param>
-		/// <param name="rightClosed">Indicates wether or not <paramref name="rightBound"/> is to be included in the interval. The default is <see langword="false"/>.</param>
+		/// <param name="rightClosed">Indicates whether or not <paramref name="rightBound"/> is to be included in the interval. The default is <see langword="false"/>.</param>
 		/// <returns>A new left- and right-bounded interval.</returns>
 		public static IBoundedInterval<T> BindRight<T>(this ILeftBoundedInterval<T> interval, T rightBound, Boolean rightClosed = false)
 		{
@@ -156,7 +156,7 @@ namespace RhoMicro.Common.Math
 		/// <typeparam name="T">The type of values represented by the interval.</typeparam>
 		/// <param name="interval">The bounded interval to walk.</param>
 		/// <param name="walker">The walker, which will be passed the last element and calculate from it the next element.</param>
-		/// <param name="comparer">The comparer to be used for determining wether the intervals right bound has been reached.</param>
+		/// <param name="comparer">The comparer to be used for determining whether the intervals right bound has been reached.</param>
 		/// <returns>An enumerable, enumerating the values yielded by <paramref name="walker"/> while walking <paramref name="interval"/>.</returns>
 		public static IEnumerable<T> Walk<T>(this IBoundedInterval<T> interval, Func<T, T> walker, IEqualityComparer<T> comparer)
 		{
@@ -198,7 +198,7 @@ namespace RhoMicro.Common.Math
 		}
 
 		/// <summary>
-		/// Returns wether or not a given left-bounded interval contains a value.
+		/// Returns whether or not a given left-bounded interval contains a value.
 		/// </summary>
 		/// <typeparam name="T">The type of values represented by the interval.</typeparam>
 		/// <param name="interval">The interval to examine.</param>
@@ -215,7 +215,7 @@ namespace RhoMicro.Common.Math
 			return result;
 		}
 		/// <summary>
-		/// Returns wether or not a given left-bounded interval contains a value.
+		/// Returns whether or not a given left-bounded interval contains a value.
 		/// </summary>
 		/// <typeparam name="T">The type of values represented by the interval.</typeparam>
 		/// <param name="interval">The interval to examine.</param>
@@ -231,7 +231,7 @@ namespace RhoMicro.Common.Math
 		}
 
 		/// <summary>
-		/// Returns wether or not a given right-bounded interval contains a value.
+		/// Returns whether or not a given right-bounded interval contains a value.
 		/// </summary>
 		/// <typeparam name="T">The type of values represented by the interval.</typeparam>
 		/// <param name="interval">The interval to examine.</param>
@@ -248,7 +248,7 @@ namespace RhoMicro.Common.Math
 			return result;
 		}
 		/// <summary>
-		/// Returns wether or not a given right-bounded interval contains a value.
+		/// Returns whether or not a given right-bounded interval contains a value.
 		/// </summary>
 		/// <typeparam name="T">The type of values represented by the interval.</typeparam>
 		/// <param name="interval">The interval to examine.</param>
@@ -264,7 +264,7 @@ namespace RhoMicro.Common.Math
 		}
 
 		/// <summary>
-		/// Returns wether or not a given left- and right-bounded interval contains a value.
+		/// Returns whether or not a given left- and right-bounded interval contains a value.
 		/// </summary>
 		/// <typeparam name="T">The type of values represented by the interval.</typeparam>
 		/// <param name="interval">The interval to examine.</param>
@@ -297,7 +297,7 @@ namespace RhoMicro.Common.Math
 		}
 
 		/// <summary>
-		/// Returns wether or not a given left- and right-bounded interval contains a value.
+		/// Returns whether or not a given left- and right-bounded interval contains a value.
 		/// </summary>
 		/// <typeparam name="T">The type of values represented by the interval.</typeparam>
 		/// <param name="interval">The interval to examine.</param>

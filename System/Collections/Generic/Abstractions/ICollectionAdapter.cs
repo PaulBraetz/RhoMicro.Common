@@ -4,15 +4,13 @@ using System.Net;
 namespace RhoMicro.Common.System.Collections.Generic.Abstractions
 {
 	/// <summary>
-	/// Adapts the <see cref="ICollection{T}"/> interface onto interfaces found in the <c>RhoMicro.Common.System.Collections.Generic.Abstractions</c> namespace.
+	/// Adapts the <see cref="ICollection{T}"/> interface to interfaces found in the <c>RhoMicro.Common.System.Collections.Generic.Abstractions</c> namespace.
 	/// </summary>
 	/// <typeparam name="T">
-	/// The type of elements in the collection.
+	/// The type of elements contained in the collection.
 	/// </typeparam>
-	public interface ICollectionAdapter<T> : ICollection<T>, IHasClear<T>, IHasAdd<T>, IHasTryRemoveFirst<T>, IHasContains<T>, IHasLength<T>
+	public interface ICollectionAdapter<T> : ICollection<T>, IHasSize<T>, IHasInsert<T>, IHasClear<T>, IHasContains<T>, IHasRemove<T>, IHasCopyTo<T>
 	{
 
 	}
-
-	public interface IAdapter:global::System.Collections.Generic.IReadOnlyCollection
 }

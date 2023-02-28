@@ -9,7 +9,7 @@ namespace RhoMicro.Common.Math.Abstractions
 	public interface IRightBoundedInterval<T>
 	{
 		/// <summary>
-		/// Indicates wether or not <see cref="RightBound"/> is to be included in the interval.
+		/// Indicates whether or not <see cref="RightBound"/> is to be included in the interval.
 		/// </summary>
 		Boolean RightClosed { get; }
 		/// <summary>

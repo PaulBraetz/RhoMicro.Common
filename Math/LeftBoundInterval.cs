@@ -29,7 +29,7 @@ namespace RhoMicro.Common.Math
 		/// Creates a left-bounded interval.
 		/// </summary>
 		/// <param name="leftBound">The intervals left (usually upper) bound.</param>
-		/// <param name="leftClosed">Indicates wether or not <paramref name="leftBound"/> is to be included in the interval. The default is <see langword="false"/>.</param>
+		/// <param name="leftClosed">Indicates whether or not <paramref name="leftBound"/> is to be included in the interval. The default is <see langword="false"/>.</param>
 		/// <returns>A new left-bounded interval.</returns>
 		public static ILeftBoundedInterval<T> Create(T leftBound, Boolean leftClosed)
 		{

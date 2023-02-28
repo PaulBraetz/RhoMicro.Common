@@ -9,7 +9,7 @@ namespace RhoMicro.Common.Math.Abstractions
 	public interface ILeftBoundedInterval<T>
 	{
 		/// <summary>
-		/// Indicates wether or not <see cref="LeftBound"/> is to be included in the interval.
+		/// Indicates whether or not <see cref="LeftBound"/> is to be included in the interval.
 		/// </summary>
 		Boolean LeftClosed { get; }
 		/// <summary>

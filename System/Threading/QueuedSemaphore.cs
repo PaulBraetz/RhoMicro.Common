@@ -19,7 +19,7 @@ namespace RhoMicro.Common.System.Threading
 		/// Initializes a new instance with the arguments provided.
 		/// </summary>
 		/// <param name="lastTurn">The last turn in a cycle, or the amount turns available.</param>
-		/// <param name="ordered">Indicates wether or not turns are taken sequentially.</param>
+		/// <param name="ordered">Indicates whether or not turns are taken sequentially.</param>
 		public QueuedSemaphore(Int32 lastTurn, Boolean ordered)
 		{
 			lastTurn.ThrowIfNot(t => t > 0, $"{nameof(lastTurn)} must be > 0.", nameof(lastTurn));
@@ -34,7 +34,7 @@ namespace RhoMicro.Common.System.Threading
 		/// </summary>
 		public Int32 LastTurn { get; }
 		/// <summary>
-		/// Indicates wether or not turns must be taken in order.
+		/// Indicates whether or not turns must be taken in order.
 		/// </summary>
 		public Boolean Ordered { get; }
 		/// <summary>

@@ -88,7 +88,7 @@ namespace RhoMicro.Common.IO
 		}
 
 		/// <summary>
-		/// Evaluates wether or not a directory is contained in another or equal to it.
+		/// Evaluates whether or not a directory is contained in another or equal to it.
 		/// </summary>
 		/// <param name="directory">The directory to check for being a descendant of <paramref name="parent"/>.</param>
 		/// <param name="parent">The directory that is checked to contain <paramref name="directory"/>.</param>

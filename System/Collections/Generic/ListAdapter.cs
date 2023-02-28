@@ -8,7 +8,7 @@ namespace RhoMicro.Common.System.Collections.Generic
 	/// Default implementation of <see cref="IListAdapter{T}"/>.
 	/// </summary>
 	/// <typeparam name="T">
-	/// The type of elements in the collection.
+	/// The type of elements contained in the collection.
 	/// </typeparam>
 	/// <typeparam name="TList">
 	/// The type of collection to adapt.
@@ -36,6 +36,10 @@ namespace RhoMicro.Common.System.Collections.Generic
 		public Int32 GetIndexOf(T item)
 		{
 			return BaseCollection.IndexOf(item);
+		}
+		public void InsertAt(Int32 index, T element)
+		{
+			BaseCollection.Insert(index, element);
 		}
 
 		Int32 IList<T>.IndexOf(T item)

@@ -38,8 +38,8 @@ namespace RhoMicro.Common.Math
 		/// </summary>
 		/// <param name="leftBound">The intervals left (usually lower) bound.</param>
 		/// <param name="rightBound">The intervals right (usually upper) bound.</param>
-		/// <param name="leftClosed">Indicates wether or not <paramref name="leftBound"/> is to be included in the interval. The default is <see langword="true"/>.</param>
-		/// <param name="rightClosed">Indicates wether or not <paramref name="rightBound"/> is to be included in the interval. The default is <see langword="false"/>.</param>
+		/// <param name="leftClosed">Indicates whether or not <paramref name="leftBound"/> is to be included in the interval. The default is <see langword="true"/>.</param>
+		/// <param name="rightClosed">Indicates whether or not <paramref name="rightBound"/> is to be included in the interval. The default is <see langword="false"/>.</param>
 		/// <returns>A new left- and right-bounded interval.</returns>
 		public static IBoundedInterval<T> Create(T leftBound,
 											   T rightBound,

@@ -20,7 +20,7 @@ namespace RhoMicro.Common.System.IO
 		/// <param name="stream">The stream to append to.</param>
 		/// <param name="next">The stream to append to <paramref name="stream"/>.</param>
 		/// <param name="manageLifetime">
-		/// Indicates wether or not to dispose <paramref name="next"/> after it has 
+		/// Indicates whether or not to dispose <paramref name="next"/> after it has 
 		/// been fully read or when the instance returned is being disposed.
 		/// </param>
 		/// <returns>
@@ -42,7 +42,7 @@ namespace RhoMicro.Common.System.IO
 		/// <param name="stream">The stream to append to.</param>
 		/// <param name="next">The streams to append to <paramref name="stream"/>.</param>
 		/// <param name="manageLifetime">
-		/// Indicates wether or not to dispose <paramref name="next"/> after they have 
+		/// Indicates whether or not to dispose <paramref name="next"/> after they have 
 		/// been fully read or when the instance returned is being disposed.
 		/// </param>
 		/// <returns>
@@ -66,7 +66,7 @@ namespace RhoMicro.Common.System.IO
 		/// <param name="stream">The stream to append to.</param>
 		/// <param name="next">The streams to append to <paramref name="stream"/>.</param>
 		/// <param name="manageLifetime">
-		/// Indicates wether or not to dispose <paramref name="next"/> after they have 
+		/// Indicates whether or not to dispose <paramref name="next"/> after they have 
 		/// been fully read or when the instance returned is being disposed.
 		/// </param>
 		/// <returns>
