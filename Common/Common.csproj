@@ -11,7 +11,7 @@
 		<Authors>Paul Braetz</Authors>
 		<Description>Common types used in RhoMicro projects.</Description>
 		<Website>https.ww.github.com/PaulBraetz/RhoMicro.Common</Website>
-		<Version>3.7.0</Version>
+		<Version>3.8.0</Version>
 		<IncludeSymbols>True</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
@@ -59,6 +59,8 @@
 		<Compile Include="..\System\IO\LazyFileStream.cs" Link="System\IO\LazyFileStream.cs" />
 		<Compile Include="..\System\IO\StreamReadQueue.cs" Link="System\IO\StreamReadQueue.cs" />
 		<Compile Include="..\System\ObservableDisposableBase.cs" Link="System\ObservableDisposableBase.cs" />
+		<Compile Include="..\System\Threading\Extensions.cs" Link="System\Threading\Extensions.cs" />
+		<Compile Include="..\System\Threading\SemaphoreReleaseHandle.cs" Link="System\Threading\SemaphoreReleaseHandle.cs" />
 		<Compile Include="..\System\Threading\TaskConsumer.cs" Link="System\Threading\TaskConsumer.cs" />
 		<Compile Include="..\System\ValueString.cs" Link="System\ValueString.cs" />
 		<Compile Include="..\System\VisitorStrategy.cs" Link="System\VisitorStrategy.cs" />

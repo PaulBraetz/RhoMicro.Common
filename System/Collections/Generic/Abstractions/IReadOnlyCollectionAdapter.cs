@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace RhoMicro.Common.System.Collections.Generic.Abstractions
 {
@@ -8,7 +9,7 @@ namespace RhoMicro.Common.System.Collections.Generic.Abstractions
 	/// <typeparam name="T">
 	/// The type of elements contained in the collection.
 	/// </typeparam>
-	public interface IReadOnlyCollectionAdapter<out T> : IReadOnlyCollection<T>, IHasSize<T>
+	public interface IReadOnlyCollectionAdapter<out T> : IReadOnlyCollection<T>, IHasSize<Int32>
 	{
 	}
 }

@@ -13,7 +13,7 @@ namespace RhoMicro.Common.System.Threading
 	/// A container for tasks to complete in.
 	/// </summary>
 	[DebuggerDisplay("Count = {Count}")]
-	public sealed class TaskConsumer : ICollection<Task>
+	public sealed class TaskConsumer : ICollection<Task>, IAsyncDisposable
 	{
 		/// <inheritdoc/>
 		public Boolean IsReadOnly => false;
@@ -70,5 +70,8 @@ namespace RhoMicro.Common.System.Threading
 		{
 			return GetEnumerator();
 		}
+
+		/// <inheritdoc/>
+		public ValueTask DisposeAsync() => new ValueTask(Task.WhenAll(_tasks.Values));
 	}
 }

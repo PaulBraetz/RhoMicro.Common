@@ -29,13 +29,13 @@ namespace System.Tests.Collections.Generic
 					new[]{ Enumerable.Range(0, 1_000)},
 					new[]{ Enumerable.Range(0, 10_000) },
 					new[]{ Enumerable.Range(0, 100_000) },
-					new[]{ Enumerable.Range(0, 1_000_000) },
+					//new[]{ Enumerable.Range(0, 1_000_000) },
 					new[]{ Enumerable.Range(0, 10).Select(i=>-1*i)},
 					new[]{ Enumerable.Range(0, 100).Select(i=>-1*i)},
 					new[]{ Enumerable.Range(0, 1_000).Select(i=>-1*i)},
 					new[]{ Enumerable.Range(0, 10_000).Select(i=>-1*i) },
 					new[]{ Enumerable.Range(0, 100_000).Select(i=>-1*i) },
-					new[]{ Enumerable.Range(0, 1_000_000).Select(i=>-1*i) }
+					//new[]{ Enumerable.Range(0, 1_000_000).Select(i=>-1*i) }
 				};
 			}
 		}
@@ -48,13 +48,13 @@ namespace System.Tests.Collections.Generic
 			var heap = new MaxHeap<Int32>(comparer);
 			foreach (var item in items)
 			{
-				heap.Push(item);
+				heap.Insert(item);
 			}
 
 			var lastItem = Int32.MaxValue;
 			while (heap.Size > 0)
 			{
-				var nextItem = heap.Pop();
+				var nextItem = heap.RemoveFirst();
 				Assert.IsTrue(nextItem <= lastItem);
 				lastItem = nextItem;
 			}

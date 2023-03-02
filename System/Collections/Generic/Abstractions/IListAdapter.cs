@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using static RhoMicro.Common.System.Collections.Generic.Abstractions.At;
 
 namespace RhoMicro.Common.System.Collections.Generic.Abstractions
 {
@@ -10,7 +9,7 @@ namespace RhoMicro.Common.System.Collections.Generic.Abstractions
 	/// <typeparam name="T">
 	/// The type of elements contained in the collection.
 	/// </typeparam>
-	public interface IListAdapter<T> : IList<T>, ICollectionAdapter<T>, IHasIndexedGetter<T>, IHasIndexedSetter<T>, IHasGetIndexOf<T, Int32>, IHasInsertAt<T, Int32>, IHasRemoveAt<T, Int32>
+	public interface IListAdapter<T> : IList<T>, ICollectionAdapter<T>, IHasIndexedGetter<T, Int32>, IHasIndexedSetter<T, Int32>, IHasGetIndexOf<T, Int32>, IHasInsertAt<T, Int32>, IHasRemoveAt<T, Int32>
 	{
 
 	}

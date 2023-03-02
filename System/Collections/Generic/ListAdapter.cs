@@ -1,6 +1,7 @@
 ﻿using RhoMicro.Common.System.Collections.Generic.Abstractions;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace RhoMicro.Common.System.Collections.Generic
 {
@@ -20,26 +21,26 @@ namespace RhoMicro.Common.System.Collections.Generic
 		public ListAdapter(TList collection) : base(collection)
 		{
 		}
-
-		public T RemoveAt(Int32 index)
+		public T this[Int32 index] 
 		{
-			var result = this[index];
-			BaseCollection.RemoveAt(index);
-
-			return result;
-		}
-		public T this[Int32 index]
-		{
-			get => BaseCollection[index];
+			get => BaseCollection[index]; 
 			set => BaseCollection[index] = value;
 		}
-		public Int32 GetIndexOf(T item)
+		T IHasIndexedSetter<T, Int32>.this[Int32 index] { set => throw new NotImplementedException(); }
+		public Int32 GetIndexOf(T element)
 		{
-			return BaseCollection.IndexOf(item);
+			return BaseCollection.IndexOf(element);
 		}
 		public void InsertAt(Int32 index, T element)
 		{
 			BaseCollection.Insert(index, element);
+		}
+		public T RemoveAt(Int32 index)
+		{
+			var result = BaseCollection.ElementAt(index);
+			BaseCollection.RemoveAt(index);
+
+			return result;
 		}
 
 		Int32 IList<T>.IndexOf(T item)
@@ -54,11 +55,7 @@ namespace RhoMicro.Common.System.Collections.Generic
 		{
 			BaseCollection.RemoveAt(index);
 		}
-		T IList<T>.this[Int32 index]
-		{
-			get => BaseCollection[index];
-			set => BaseCollection[index] = value;
-		}
+		T IList<T>.this[Int32 index] { get => BaseCollection[index]; set => BaseCollection[index] = value; }
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 	}
 }
