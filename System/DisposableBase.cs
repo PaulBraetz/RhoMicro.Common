@@ -25,33 +25,39 @@ namespace RhoMicro.Common.System
 
 		private void Dispose(Boolean disposing)
 		{
-			if (Interlocked.CompareExchange(ref _disposedValue, NOT_DISPOSED, DISPOSING) == NOT_DISPOSED)
+			if (Interlocked.CompareExchange(ref _disposedValue, DISPOSING, NOT_DISPOSED) == NOT_DISPOSED)
 			{
+				Exception onDisposingException = null;
 				try
 				{
 					OnDiposing();
 				}
+				catch(Exception ex)
+				{			
+					onDisposingException= ex;
+				}
+
+				try
+				{
+					if (disposing)
+					{
+						DisposeManaged(disposing);
+					}
+
+					DisposeUnmanaged(disposing);
+
+					_disposedValue = DISPOSED;
+				}
 				catch
 				{
-					try
-					{
-						if (disposing)
-						{
-							DisposeManaged(disposing);
-						}
+					_disposedValue = NOT_DISPOSED;
 
-						DisposeUnmanaged(disposing);
-
-						_disposedValue = DISPOSED;
-					}
-					catch
-					{
-						_disposedValue = NOT_DISPOSED;
-
-						throw;
-					}
-					
 					throw;
+				}
+
+				if(onDisposingException != null)
+				{
+					throw onDisposingException;
 				}
 
 				OnDiposed();
@@ -125,6 +131,19 @@ namespace RhoMicro.Common.System
 			if (IsDisposed)
 			{
 				throw exception;
+			}
+		}
+		/// <summary>
+		/// Throws an exception if <see cref="IsDisposed"/> evaluates to <see langword="true"/>.
+		/// </summary>
+		/// <param name="exceptionFactory">The factory producing a exception to throw.</param>
+		protected void ThrowIfDisposed(Func<Exception> exceptionFactory)
+		{
+			exceptionFactory.ThrowIfDefault(nameof(exceptionFactory));
+
+			if (IsDisposed)
+			{
+				throw exceptionFactory.Invoke();
 			}
 		}
 		/// <summary>
