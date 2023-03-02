@@ -6,7 +6,7 @@ namespace RhoMicro.Common.System
 	/// <summary>
 	/// An observable base class for types implementing <see cref="IObservableDisposable"/>.
 	/// </summary>
-	public abstract class ObservableDisposableBase : DisposableBase, IObservableDisposable
+	public class ObservableDisposable : DisposableBase, IObservableDisposable
 	{
 		/// <inheritdoc/>
 		public event EventHandler Disposing;

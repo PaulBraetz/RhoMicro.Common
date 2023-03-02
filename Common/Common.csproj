@@ -11,7 +11,7 @@
 		<Authors>Paul Braetz</Authors>
 		<Description>Common types used in RhoMicro projects.</Description>
 		<Website>https.ww.github.com/PaulBraetz/RhoMicro.Common</Website>
-		<Version>3.9.0</Version>
+		<Version>3.10.0</Version>
 		<IncludeSymbols>True</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
